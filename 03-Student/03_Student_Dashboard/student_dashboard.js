@@ -206,8 +206,8 @@ document.addEventListener("DOMContentLoaded" , ()=>{
             const error = validatePassword(document.getElementById('newPassword').value.trim());
             if(error != "Password is valid!"){
                 alert(error);
+                return;
             }
-            return;
         }
 
         if(student){
