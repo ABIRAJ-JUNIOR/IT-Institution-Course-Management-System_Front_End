@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="course_offering.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- My Style Sheet -->
+    <link rel="stylesheet" href="./course_offering.css">
+
+    <!-- Fond Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="./image/logo.png">
+    <title>Course Offerings</title>
+</head>
+<body>
+    <!-- Navebar -->
+    <nav>
+        <div id="logo-container">
+            <img src="./image/logo.png" alt="logo" width="80px">
+            <p>Way</p><p> Makers</p><p>Academy</p>
+        </div>
+        <div class="navebar-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Side Navebar -->
+    <div class="side-navebar">
+        <p>
+            <i class="fa-solid fa-xmark"></i>
+        </p>
+        <ul class="side-navebar-links">
+            <li class="side-navebar-link"><a href="../02_Student_Registration/student_Registration.html">REGISTER</a></li>
+            <li class="side-navebar-link"><a href="../03_Fee_Management/fee_management.html">PAYMENT</a></li>
+            <li class="side-navebar-link"><a href="../04_Course_Offerings/course_offering.html">COURSE OFFERINGS</a></li>
+            <li class="side-navebar-link"><a href="../05_Report/report.html">REPORT</a></li>
+            <li class="side-navebar-link logout"><a href="#" id="logoutButton">Logout</a></li>
+        </ul>
+    </div>
+    
+
+    <!-- Form And Pictiure -->
+    <div id="main-container">
+        <div id="sub-container">
+            <div id="course-offerings">
+                <h2>Course Offerings</h2>
+                <form id="course-offerings-form">
+                    <table>
+                        <tr>
+                            <td><label for="courseName">Course Name</label></td>
+                            <td><input type="text" id="courseName" name="courseName" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="level">Proficiency Level</label></td>
+                            <td>
+                                <select name="level" id="level">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="fee">Course Fee</label></td>
+                            <td><input type="number" id="fee" name="fee" required></td>
+                        </tr>
+                    </table>
+                    
+                    <div id="button-container">
+                        <button type="submit" class="main-btn">Add / Update</button>
+                        <button type="button"  class="main-btn" id="view-courses-btn">View Courses</button>
+                    </div>
+
+                </form>
+
+                <div>
+                    <p id="course-offerings-message"></p>
+                </div>
+
+            </div>
+            <div class="img-container">
+                <img src="image/Education-Course-PNG-Image-Transparent.png" alt="education-course">
+            </div>
+        </div>
+    </div>
+
+    <!-- pop up box -->
+    <main class="overlay" id="overlay"></main>
+    <main class="popupbox" id="popupbox">
+        <div id="heading-container">
+            <h1>Course</h1><h1>Details</h1>
+        </div>
+        <div id="table-container">
+            <table id="course-details-table">
+                <thead>
+                    <tr>
+                        <th>Course Name</th><th>Level</th><th>Total Fee</th><th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body-courses">
+
+                </tbody>
+                <p id="course-offerings-message-2"></p>
+            </table>
+        </div>   
+    </main>
+
+
+    <script src="course_offering.js"></script>
+</body>
+</html>

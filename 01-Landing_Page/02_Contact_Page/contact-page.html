@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Fond Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Icon -->
+    <link rel="icon" href="./image/logo.png">
+
+    <!-- My style sheet -->
+    <link rel="stylesheet" href="contact-page.css">
+
+    <title>Contact</title>
+</head>
+<body>
+    <header>
+        <nav class="navebar">
+            <div id="logo-container">
+                <img src="./image/logo.png" alt="Logo" width="80px">
+                <p>Way</p><p> Makers</p><p>Academy</p>
+            </div>
+            <ul>
+                <li><a href="../01_Home_Page/landing-page.html">HOME</a></li>
+            </ul>
+        </nav>
+        <div class="head-info">
+            <h1>Let's Start a Conversation</h1>
+            <p>Need to get in touch with us? Either fill out the form with your inquiry or <br>find the Academy Email you'd like to contact below</p>
+        </div>
+    </header>
+    
+    <!-- Contact -->
+
+    <div class="contact-container">
+        <form class="contact" id="contactUsForm">
+            <h1>Contact Us</h1>
+            <label> Name:</label><br>
+            <input type="text" id="name"><br>
+            <label>Email:</label><br>
+            <input type="email" id="email"><br>
+            <label>Message:</label><br>
+            <textarea cols="80" rows="5" id="message"></textarea><br>
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1455.8509956634448!2d80.0079896276668!3d9.666176961881327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe570010da0795%3A0x642cc900b494e9a3!2sUnicom%20TIC!5e0!3m2!1sen!2slk!4v1723119162409!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h1>WAY MAKERS</h1>
+        <p>Here you can get bite-sized courses designed to sharpen the skills.</p>
+        <div class="social-icon">
+            <a href="https://www.instagram.com/abiraj.jr?igsh=MW1uZHptdnRwazloaw=="><i class="fa-brands fa-instagram"></i></a> 
+            <a href="https://x.com/abiraj_junior?t=4VLHOWjELQZQSmde30DhdA&s=09"><i class="fa-brands fa-twitter"> </i></a>
+            <a href="https://www.facebook.com/abiraj.jr?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a> 
+            <a href="https://www.linkedin.com/in/abiraj-vijayanathan-578b1a227?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa-brands fa-linkedin"></i></a> 
+        </div>
+        <p>&copy; 2024 waymakers.com</p>
+    </footer>
+
+    <script src="contact-page.js"></script>
+</body>
+</html>

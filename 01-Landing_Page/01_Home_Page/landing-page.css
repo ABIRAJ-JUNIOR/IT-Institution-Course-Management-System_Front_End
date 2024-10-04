@@ -1,0 +1,230 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+        
+}
+body{
+    width: 100%;
+    height: 100vh;
+}
+header{
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)) ,url("./image/pexels-molnartamasphotography-14031189.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    /* position: relative; */
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+/* Navebar */
+
+nav{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 10px 50px;
+    height: 80px;
+}
+
+
+#logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo-container p{
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+}
+#logo-container p::first-letter{
+    color: orange;
+    font-size: 30px;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+    width: 420px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+nav ul li{
+    margin-left: 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+}
+nav ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+nav ul li:hover::after{
+    width: 100%;
+}
+
+header >div{
+    text-align: center;
+    margin-top: 255px;
+    color: white;
+}
+
+header >div >h1{
+    font-size: 4rem;
+}
+header >div >p{
+    margin-top: 20px;
+  
+}
+header >div >button{
+    margin-top: 100px;
+    width: 200px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-size: 19px;
+    letter-spacing: 1px;
+ 
+}
+
+header >div >button:hover{
+    border:1px solid #f44336 ;
+    background: #f44336;
+}
+header > div > button:active{
+    scale:0.95;
+}
+
+/* course */
+
+.course{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.course > h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.course > p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin-top: 25px;
+}
+.container img{
+    margin: 0px 50px;
+}
+
+/* Campus */
+.campus{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.campus-col{
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.campus-col > img{
+    width: 100%;
+    height: 500px;
+    display: block;
+}
+.layer{
+    background-color:transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+.layer > h3{
+    width: 100%;
+    font-weight: 300;
+    color: white;
+    font-size: 26px;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+.layer:hover{
+    background-color: rgb(266, 0, 0,0.7);
+}
+.layer:hover h3{
+    opacity: 1;
+    bottom: 49%;
+}
+
+/* Facilities */
+
+.facilities{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.facilities-col{
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+}
+.facilities-col img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer{
+    padding: 50px;
+    color: #f2f4f7;
+    background-color: #1d232c;
+    margin-top: 20px;
+  
+}
+footer h1{
+    font-weight: bolder;
+}
+
+.social-icon{
+    display: flex;
+    column-gap: 15px;
+}
+.social-icon a{
+    color: #f2f4f7;
+}

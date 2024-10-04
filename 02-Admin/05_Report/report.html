@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- My Style Sheet -->
+    <link rel="stylesheet" href="./report.css">
+
+    <!-- Fond Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="./image/logo.png">
+
+    <title>Report</title>
+</head>
+<body>
+    <!-- Navebar -->
+    <nav>
+        <div id="logo-container">
+            <img src="./image/logo.png" alt="logo" width="80px">
+            <p>Way</p><p> Makers</p><p>Academy</p>
+        </div>
+        <ul>
+            <li><a id="student-report-link">Student Report</a></li>
+            <li><a id="course-enrollment-link">Course Enrollment</a></li>
+            <li><a id="financial-report-link">Financial Report</a></li>
+        </ul>
+        <div class="navebar-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Side Navebar -->
+    <div class="side-navebar">
+        <p>
+            <i class="fa-solid fa-xmark"></i>
+        </p>
+        <ul class="side-navebar-links">
+            <li class="side-navebar-link"><a href="../02_Student_Registration/student_Registration.html">REGISTER</a></li>
+            <li class="side-navebar-link"><a href="../03_Fee_Management/fee_management.html">PAYMENT</a></li>
+            <li class="side-navebar-link"><a href="../04_Course_Offerings/course_offering.html">COURSE OFFERINGS</a></li>
+            <li class="side-navebar-link"><a href="../05_Report/report.html">REPORT</a></li>
+            <li class="side-navebar-link logout"><a href="#" id="logoutButton">Logout</a></li>
+        </ul>
+    </div>
+
+    <main id="student-report" >
+        <div id="report-container">
+
+            <div class="heading">
+                <h1>Student</h1><h1>Report</h1>
+                <div id="search-container">
+                    <input type="text" id="search-by-nic" placeholder="NIC number"><button id="report-generate-btn">Generate Report</button>
+                </div>
+            </div>
+
+            <div id="form-container">
+                <form id="personal-details">
+                    <div class="form-group">
+                        <div>
+                            <h2>Personal Details</h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <td><label for="nic">NIC Number :</label></td><td><input type="text" id="nic" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="name">Full Name :</label></td><td><input type="text" id="name" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email">Email :</label></td><td><input type="text" id="email" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="phone">Phone No :</label></td><td><input type="text" id="phone" disabled></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+                <form id="course-details">
+                    <div class="form-group">
+                        <div>
+                            <h2>Course Details</h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <td><label for="cours-ename">Course Name :</label></td><td><input type="text" id="course-name" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="level">Proficiency Level :</label></td><td><input type="text" id="level" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="duration">Duration :</label></td><td><input type="text" id="duration" disabled></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+                <form id="payment-details">
+                    <div class="form-group">
+                        <div>
+                            <h2>Payment Details</h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <td><label for="fee">Course Fee :</label></td><td><input type="text" id="fee" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="plan">Payment Plan :</label></td><td><input type="text" id="plan" disabled></td>
+                            </tr>
+                            <tr id="full-payment-row">
+                                <td><label for="full-payment">Paid Payment :</label></td><td><input type="text" id="full-payment" disabled></td>
+                            </tr>
+                            <tr id="installments-row">
+                                <td><label for="installments">Installments :</label></td><td><input type="text" id="installments" disabled></td>
+                            </tr>
+                            <tr id="installment-amount-row">
+                                <td><label for="installment-amount">Installment Amount :</label></td><td><input type="text" id="installment-amount" disabled></td>
+                            </tr>
+                            <tr id="payment-paid-row">
+                                <td><label for="payment-paid">Payment Paid :</label></td><td><input type="text" id="payment-paid" disabled></td>
+                            </tr>
+                            <tr id="payment-due-row">
+                                <td><label for="payment-due">Payment Due :</label></td><td><input type="text" id="payment-due" disabled></td>
+                            </tr>
+                            <tr id="payment-date-row">
+                                <td><label for="payment-date">Payment Date :</label></td><td><input type="text" id="payment-date" disabled></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            
+
+        </div>
+    </main>
+
+    <main id="course-enrollment" style="display: none;">
+        <div id="report-container">
+
+            <div class="heading">
+                <h1>Course</h1><h1>Enrollment</h1>
+            </div>
+
+            <div id="table-container">
+                <table id="course-enrollment-table">
+
+                    <tr>
+                        <th>Course ID</th><th>Course Name</th><th>Proficiency Level</th><th>Enrollment</th>
+                    </tr>
+                    
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <main id="financial-report" style="display: none;">
+        <div id="report-container">
+
+            <div class="heading">
+                <h1>Financial</h1><h1>Report</h1>
+            </div>
+
+            <div id="financial-report-container">
+                <form id="financial-report-form">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td><label for="initia-amount">Initial Amount :</label></td><td><input type="text" id="initia-amount" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="course-amount">Course Amount :</label></td><td><input type="text" id="course-amount" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="total-amount">Total Income :</label></td><td><input type="text" id="total-amount" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label for="out-standing-amount">Out Standing Amount:</label></td><td><input type="text" id="out-standing-amount" disabled></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="report.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;       
+}
+
+body{
+    height: 100vh;
+}
+/* Navebar */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    height: 90px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+#logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo-container p{
+    font-size: 25px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+#logo-container p::first-letter{
+    color: orange;
+    font-size: 30px;
+}
+.navebar-menu-toggle{
+    font-size: 2.2rem;
+    padding-top: 15px;
+}
+
+.navebar-link a:hover{
+    text-decoration: underline;
+}
+
+.fa-bars{
+    cursor: pointer;
+}
+.fa-bars:active{
+    scale: 0.9;
+}
+nav>ul{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+nav>ul>li{
+    list-style: none;
+}
+nav>ul>li>a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d232c;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Side Navebar */
+
+.side-navebar{
+    width: 20%;
+    height: 100%;
+    background-color:#1d232c;
+    position: fixed;
+    top: 0;
+    right: -60%;
+    padding: 20px;
+    color: white;
+    transition: 1s;
+    margin: 0;
+    z-index: 5;
+}
+
+.side-navebar p{
+    text-align: right;
+    font-size: 2rem;
+}
+.fa-xmark{
+    cursor: pointer;
+}
+.fa-xmark:active{
+    scale: 0.9;
+}
+
+.side-navebar-links{
+    list-style: none;
+}
+.side-navebar-link{
+    margin-bottom: 30px;
+}
+.side-navebar-link a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+a:hover::after{
+    width: 100%;
+}
+.logout > a{
+    color: red;
+}
+
+
+/* Report  */
+/* Student Report */
+main{
+    padding: 65px 50px;
+}
+
+#report-container{
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40px;
+    background-color:antiquewhite;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+}
+
+.heading{
+    display: flex;
+    gap: 15px;
+    padding: 20px 25px;
+}
+.heading > h1::first-letter{
+    color: orange;
+    font-size: 40px;
+}
+#search-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#search-container > input{
+    border-radius: 25px;
+    height: 40px;
+    width: 220px;
+    padding: 0px 15px;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+#search-container > button{
+    width: 140px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background-color: orange;
+}
+#search-container > button:active{
+    scale: 0.95;
+}
+
+#form-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+input{
+    margin:10px 20px;
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    background-color:white;
+    outline: none;
+    border: none;
+    padding:0px 10px;
+    font-weight: 600;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+input:focus{
+    outline: none;
+}
+label{
+    font-size: 20px;
+}
+
+
+/* Course Enrollment */
+
+#table-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content:center;
+    padding-bottom: 25px;
+    position: relative;
+    overflow: auto;
+    height: 85%;
+    padding: 0px 25px;
+}
+#table-container > table{
+    height: 50px;
+    border-spacing:15px;
+    width: 100%;
+
+}
+#table-container > table > tr:hover{
+    background-color: lightgrey;
+}
+th{
+    border:2px solid black;
+    border-radius: 10px;
+}
+#table-container > table td{
+   border-bottom: 2px solid black;
+   text-align: center;
+}
+
+/* Financial Report */
+#financial-report-container{
+    padding-left: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 100px;
+    height: 450px;
+}
+
+.chart-container{
+    width: 500px;
+    height: 450px;
+}

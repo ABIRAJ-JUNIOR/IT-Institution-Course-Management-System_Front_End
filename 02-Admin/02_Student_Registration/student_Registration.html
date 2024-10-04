@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- My Style Sheet -->
+    <link rel="stylesheet" href="./student_Registration.css">
+
+    <!-- Fond Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="./image/logo.png">
+
+    <title>Student Registration</title>
+</head>
+<body>
+    <!-- Navebar -->
+    <nav>
+        <div id="logo-container">
+            <img src="./image/logo.png" alt="logo" width="80px">
+            <p>Way</p><p> Makers</p><p>Academy</p>
+        </div>
+        <div class="navebar-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Side Navebar -->
+    <div class="side-navebar">
+        <p>
+            <i class="fa-solid fa-xmark"></i>
+        </p>
+        <ul class="side-navebar-links">
+            <li class="side-navebar-link"><a href="../02_Student_Registration/student_Registration.html">REGISTER</a></li>
+            <li class="side-navebar-link"><a href="../03_Fee_Management/fee_management.html">PAYMENT</a></li>
+            <li class="side-navebar-link"><a href="../04_Course_Offerings/course_offering.html">COURSE OFFERINGS</a></li>
+            <li class="side-navebar-link"><a href="../05_Report/report.html">REPORT</a></li>
+            <li class="side-navebar-link logout"><a href="#" id="logoutButton">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Form And Pictiure -->
+    <div id="main-container">
+        <div id="sub-container">
+            <div id="student-registration">
+                <h2>Student Registration</h2>
+                <form id="registration-form">
+
+                    <div class="form-group">
+                        <label for="nic">NIC Number</label>
+                        <input type="text" id="nic" name="nic" autocomplete="off"  required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div id="button-container">
+                        <button type="submit" class="main-btn">Register</button>
+                        <button type="button"  class="main-btn" id="view-students-btn">View Students</button>
+                    </div>
+
+                </form>
+
+                <div>
+                    <p id="user-registration-message"></p>
+                </div>
+
+            </div>
+    
+            <div id="svg-container">
+                <img src="./image/Mobile login-pana.png" alt="" width="700px">
+            </div>
+        </div>
+    </div>
+
+    <!-- pop up box -->
+    <main class="overlay" id="overlay"></main>
+    <main class="popupbox" id="popupbox">
+        <div id="heading-container">
+            <h1>Student</h1><h1>Details</h1>
+        </div>
+        
+        <div id="table-container">
+            <table class="popup-table">
+                <thead>
+                    <tr>
+                        <th>NIC Number</th>
+                        <th>Full Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="student-details-table">
+
+                   
+                </tbody>
+            </table>
+        </div>
+        <p id="user-registration-message-2"></p>
+    </main>
+
+
+    <script src="./student_Registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-style: normal; 
+        
+}
+body{
+    height: 100vh;
+    background: url(./image/pencil-eraser-paper-clip-with-blue-card-paper-white-backdrop.jpg);
+    background-position: center;
+    background-size: cover;
+}
+/* Navebar */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    height: 90px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+#logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo-container p{
+    font-size: 25px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+#logo-container p::first-letter{
+    color: orange;
+    font-size: 30px;
+}
+.navebar-menu-toggle{
+    font-size: 2.2rem;
+    padding-top: 15px;
+}
+
+.navebar-link a:hover{
+    text-decoration: underline;
+}
+
+.fa-bars{
+    cursor: pointer;
+}
+.fa-bars:active{
+    scale: 0.9;
+}
+
+
+/* Side Navebar */
+
+.side-navebar{
+    width: 20%;
+    height: 100%;
+    background-color:#1d232c;
+    position: fixed;
+    top: 0;
+    right: -60%;
+    padding: 20px;
+    color: white;
+    transition: 1s;
+    margin: 0;
+    z-index: 5;
+}
+
+.side-navebar p{
+    text-align: right;
+    font-size: 2rem;
+}
+.fa-xmark{
+    cursor: pointer;
+}
+.fa-xmark:active{
+    scale: 0.9;
+}
+
+.side-navebar-links{
+    list-style: none;
+}
+.side-navebar-link{
+    margin-bottom: 30px;
+}
+.side-navebar-link a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+}
+a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+a:hover::after{
+    width: 100%;
+}
+.logout > a{
+    color: red;
+}
+
+/* Form */
+
+#main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+}
+#sub-container{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+section {
+    margin-bottom: 2rem;
+}
+
+#main-container  h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: #007bff;
+    letter-spacing: 2px;
+
+}
+#student-registration{
+  background-color: rgb(211, 220, 238);
+  padding: 30px 50px 50px 50px;
+  border-radius: 20px;
+  height: 620px;
+  width: 510px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size:16px;
+    font-weight: bold;
+    color: black;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#button-container{
+    display: flex;
+    gap: 15px;
+}
+
+.main-btn {
+    width: 100%;
+    padding:9px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;
+    font-size: 19px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.main-btn:hover {
+    background-color: #0056b3;
+}
+/* Mesage */
+#student-registration > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 15px;
+}
+#student-registration > div >p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+/* Popup box */
+
+.overlay{
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    display: none;
+}
+
+.popupbox{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    width: 85%;
+    height: 75%;
+    border-radius: 10px;
+    left: 8%;
+    padding: 20px;
+    top: 10%;
+    background-color: rgb(238, 235, 235);
+    display: none;
+   
+}
+#heading-container{
+    display: flex;
+    gap: 10px;
+}
+#heading-container > h1::first-letter {
+    color:orange;
+    font-size: larger;
+}
+
+
+
+/* Pop Up Table */
+
+ #table-container{
+    position: relative;
+    overflow: auto;
+    height: 85%;
+}
+
+.popup-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+td {
+    text-align: center;
+    padding: 8px;
+}
+th{
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.table-input {
+    width: 90%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background-color: white;
+    font-weight: 600;
+}
+.btn {
+    padding: 6px;
+    margin: 5px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn:active{
+    scale: 0.95;
+}
+
+#user-registration-message-2{
+    position: absolute;
+    left: 50%;
+    bottom: 15px;
+    transform: translateX(-50%);
+    font-size: 25px;
+    font-weight: bolder;
+    display: none;
+}
+
+.remove-btn{
+    background-color: rgb(235, 79, 79);
+    color: white;
+    border-radius: 5px;
+
+}
+.save-btn{
+    background-color: rgb(0, 128, 0);
+    color: white;
+    border-radius: 5px;
+}
+.update-btn{
+    background-color:orange;
+    color: white;
+    border-radius: 5px;
+}

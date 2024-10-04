@@ -1,0 +1,163 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;    
+}
+
+body{
+    height: 100vh;
+    background-image: url(./image/colorful-pencils-concept-with-copy-space.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+/* Navebar */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    height: 90px;
+    backdrop-filter: blur(20px);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+#logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo-container p{
+    font-size: 25px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+#logo-container p::first-letter{
+    color: orange;
+    font-size: 30px;
+}
+
+
+
+/* Form */
+
+#main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+#sub-container{
+    display: flex;
+    gap: 100px;
+}
+section {
+    margin-bottom: 2rem;
+}
+
+#main-container  h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.3rem;
+    margin-bottom: 50px;
+    color: #007bff;
+    letter-spacing: 2px;
+
+}
+#student-registration{
+  margin: auto;  
+  background-color: rgb(211, 220, 238);
+  padding: 30px 50px 50px 50px;
+  border-radius: 20px;
+  width: 750px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+label {
+    font-weight: 550;
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-style: normal; 
+}
+table{
+    width: 92%;
+}
+input , select{
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-left: 25px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+input:focus{
+    outline: none;
+    background-color:#85b2dc;
+}
+
+button {
+    padding:9px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;
+    font-size: 19px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#student-registration > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 25px;
+}
+#student-registration > div >p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+#message-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+}
+#message-container p{
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+/* Footer */
+footer{
+    padding: 50px;
+    color: #f2f4f7;
+    background-color: #1d232c;
+    margin-top: 20px;
+  
+}
+footer h1{
+    font-weight: bolder;
+}
+
+.social-icon{
+    display: flex;
+    column-gap: 15px;
+}
+.social-icon a{
+    color: #f2f4f7;
+}
