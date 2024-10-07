@@ -17,6 +17,22 @@ toggleClose.addEventListener("click" , function(){
 })
 
 
+function generateCourseID(lastID) {
+    let numericPart = parseInt(lastID.slice(1));
+    numericPart++;
+    let newID = "C" + numericPart.toString().padStart(3, "0");
+    lastCourseID = newID
+    return newID;
+}
+
+
+let lastCourseID;
+if(courses.length != 0){
+    lastCourseID = courses[courses.length - 1].id
+}else{
+    lastCourseID = "C000";
+}
+
 //Form Submit Function
 document.getElementById("course-offerings-form").addEventListener('submit',(event) =>{
     event.preventDefault();
@@ -24,7 +40,7 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
     const courseName = document.getElementById("courseName").value.trim();
     const level = document.getElementById("level").value;
     const totalFee = Number(document.getElementById("fee").value.trim());
-    let id = Number(Math.floor(Math.random()*1000000))
+    let id = generateCourseID(lastCourseID);
 
     const course = courses.find(c=>c.courseName == courseName && c.level == level)
     if(course){
@@ -76,7 +92,7 @@ function CoursesTable(){
             <td>${course.courseName}</td>
             <td>${course.level}</td>
             <td>${course.totalFee}/= </td>
-            <td><button class ="action-btn btn2" onclick="removeCourseById(event,${course.id})" >Remove</button></td>
+            <td><button class ="action-btn btn2" onclick="removeCourseById(event,'${course.id}')" >Remove</button></td>
         `;
         table.appendChild(row);
     });
