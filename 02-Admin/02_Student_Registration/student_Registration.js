@@ -12,9 +12,6 @@ toggleClose.addEventListener("click" , function(){
 })
 
 
-let students = JSON.parse(localStorage.getItem('Students')) || [];
-
-
 //password Encryption
 function encryption(password){
     return btoa(password)
@@ -79,9 +76,10 @@ document.getElementById("registration-form").addEventListener("submit" , functio
     const email = document.getElementById("email").value.trim(); 
     const phone = document.getElementById('phone').value.trim(); 
     const password = encryption(document.getElementById('password').value.trim());
+    const fileInput = document.getElementById('profilepic').files; 
     const registrationFee = 2500;
 
-    // Validate NIC, phone, and password before proceeding
+    // Validate Nic, phone, and password before Registration
     if(validateNic(nic) != true) {
         document.getElementById("user-registration-message").style.color = "Red";
         document.getElementById("user-registration-message").textContent = "Invalid NIC format. Should be 9 numbers followed by a letter V or 12 numbers only.";
@@ -113,22 +111,24 @@ document.getElementById("registration-form").addEventListener("submit" , functio
         document.getElementById('user-registration-message').style.color = "Red";
         document.getElementById('user-registration-message').textContent = "User already exist"
     }else{
-            const studentData = {
-                nic,
-                fullName,
-                email,
-                phone,
-                password,
-                registrationFee,
-                courseEnrollId:0
-            }
-            students.push(studentData);
-            localStorage.setItem('Students' , JSON.stringify(students))
+            const formData = new FormData();
+            formData.append("nic", nic);
+            formData.append("fullName", fullName);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            formData.append("password", password);
+            formData.append("registrationFee", registrationFee);
+            formData.append("imageFile", fileInput[0]);
+
+            AddStudent(formData);
     
             document.getElementById('user-registration-message').style.color = "Green";
             document.getElementById('user-registration-message').textContent = "Register Successfuly";
             document.getElementById('nic').style.border = "none"
             document.getElementById('password').style.border = "none"
+            document.getElementById('fullname').style.border = "none"
+            document.getElementById('email').style.border = "none"
+            document.getElementById('phone').style.border = "none"
             event.target.reset();
     }
 
@@ -144,28 +144,66 @@ document.getElementById("registration-form").addEventListener("submit" , functio
 document.getElementById('nic').addEventListener("keyup" , () =>{
     const nic = document.getElementById('nic').value.trim();
     const student = students.find((student) => student.nic == nic);
-
-        if (nic.length != 0) {
-            if(!validateNic(nic)){
-                document.getElementById('nic').style.border = "2px solid Red"
-                document.getElementById("user-registration-message").style.color = "Red";
-                document.getElementById("user-registration-message").textContent = "Invalid NIC format. Should be 9 numbers followed by a letter V or 12 numbers only.";
-            }else{
-                if(student){
-                    document.getElementById('user-registration-message').style.color = "Red";
-                    document.getElementById('user-registration-message').textContent = "Student Already Exists";
-                    document.getElementById('nic').style.border = "2px solid Red"
-            
-                }else{
-                    document.getElementById('user-registration-message').style.color = "Green";
-                    document.getElementById('user-registration-message').textContent = "New Student";
-                    document.getElementById('nic').style.border = "2px solid green"
-                } 
-            }
+    if (nic.length != 0) {
+        if(!validateNic(nic)){
+            document.getElementById('nic').style.border = "2px solid Red"
+            document.getElementById("user-registration-message").style.color = "Red";
+            document.getElementById("user-registration-message").textContent = "Invalid NIC format. Should be 9 numbers followed by a letter V or 12 numbers only.";
         }else{
-            document.getElementById('nic').style.border = "none"
-            document.getElementById('user-registration-message').textContent = ""
+            if(student){
+                document.getElementById('user-registration-message').style.color = "Red";
+                document.getElementById('user-registration-message').textContent = "Student Already Exists";
+                document.getElementById('nic').style.border = "2px solid Red"
+        
+            }else{
+                document.getElementById('user-registration-message').style.color = "Green";
+                document.getElementById('user-registration-message').textContent = "New Student";
+                document.getElementById('nic').style.border = "2px solid green"
+            } 
         }
+    }else{
+        document.getElementById('nic').style.border = "none"
+        document.getElementById('user-registration-message').textContent = ""
+    }
+   
+});
+
+document.getElementById('fullname').addEventListener("keyup" ,()=>{
+    const FullName = document.getElementById('fullname').value;
+
+    if(FullName.length > 0){
+        document.getElementById('fullname').style.border = "2px solid green"
+    }else{
+        document.getElementById('fullname').style.border = "none"
+    }
+});
+
+document.getElementById('email').addEventListener("keyup" ,()=>{
+    const Email = document.getElementById('email').value;
+
+    if(Email.length > 0){
+        document.getElementById('email').style.border = "2px solid green"
+    }else{
+        document.getElementById('email').style.border = "none"
+    }
+});
+
+document.getElementById('phone').addEventListener("keyup" ,()=>{
+    const phone = document.getElementById('phone').value;
+
+    if(phone.length > 0){
+        if(validatePhone(phone) != true) {
+            document.getElementById('phone').style.border = "2px solid Red"
+            document.getElementById("user-registration-message").style.color = "Red";
+            document.getElementById("user-registration-message").textContent = "Invalid phone number. Must be 10 digits long.";
+        }else{
+            document.getElementById('phone').style.border = "2px solid green"
+            document.getElementById("user-registration-message").textContent = ""
+        }
+    }else{
+        document.getElementById('phone').style.border = "none"
+        document.getElementById("user-registration-message").textContent = ""
+    }
 });
 
 document.getElementById('password').addEventListener("keyup" , () =>{
@@ -224,8 +262,8 @@ function ShowTable(){
                 <td><input class="table-input" type="tel" id="popup-phone-${student.nic}" value="${student.phone}" required disabled></td>
                 <td><input class="table-input" type="email" id="popup-email-${student.nic}" value="${student.email}" required  disabled>
                 <td><button class="btn update-btn" id="update-${student.nic}" onclick="updateStudent('popup-fullname-${student.nic}','popup-email-${student.nic}','popup-phone-${student.nic}','update-${student.nic}','save-${student.nic}')">Update</button>
-                <button class="btn save-btn" id="save-${student.nic}" style="display: none;" onclick="saveStudent('popup-fullname-${student.nic}','popup-email-${student.nic}','popup-phone-${student.nic}','update-${student.nic}','save-${student.nic}',${student.nic})">Save</button>
-                <button class="btn remove-btn" onclick="removeStudentByNicNumber(event,${student.nic})">Remove</button></td>
+                <button class="btn save-btn" id="save-${student.nic}" style="display: none;" onclick="saveStudent('popup-fullname-${student.nic}','popup-email-${student.nic}','popup-phone-${student.nic}','update-${student.nic}','save-${student.nic}','${student.nic}')">Save</button>
+                <button class="btn remove-btn" onclick="removeStudentByNicNumber(event,'${student.nic}')">Remove</button></td>
             `;
             table.appendChild(row);
         });
@@ -266,14 +304,14 @@ function saveStudent(fullName,email,phone,UpdateButton,SaveButton,studentNIC){
     const newEmail = document.getElementById(email).value.trim();
     const newPhone = document.getElementById(phone).value.trim();
 
-    const student = students.find((student) => student.nic == studentNIC);
-    if(fullName != "" && email != "" && phone != ""){
-        
-        student.fullName = newName;
-        student.email = newEmail;
-        student.phone = newPhone;
 
-        localStorage.setItem('Students' , JSON.stringify(students));
+    if(fullName != "" && email != "" && phone != ""){
+        const StudentUpdateData = {
+            fullName:newName,
+            email:newEmail,
+            phone:newPhone
+        }
+        UpdateStudent(studentNIC , StudentUpdateData)
 
         document.getElementById('user-registration-message-2').style.display = "inline-block"
         document.getElementById('user-registration-message-2').style.color = "green"
@@ -295,12 +333,11 @@ function removeStudentByNicNumber(event,StudentNicToRemove) {
         const row = event.target.parentElement.parentElement;
         row.remove();
 
-        let indexToRemove = students.findIndex(obj => obj.nic == StudentNicToRemove);
+        let indexToRemove = students.findIndex(obj => obj.nic.toString() === StudentNicToRemove.toString());
 
         if (indexToRemove !== -1) {
 
-            students.splice(indexToRemove , 1)
-            localStorage.setItem('Students' , JSON.stringify(students));
+            DeleteStudent(StudentNicToRemove)
 
             document.getElementById('user-registration-message-2').style.display = "inline-block"
             document.getElementById('user-registration-message-2').style.color = "Green";
@@ -329,4 +366,3 @@ if(logoutButton){
         logout();
     });
 }
-
