@@ -11,6 +11,54 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%"
 })
 
+let students = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+async function GetAllStudents(){
+    //Fetch Students Data from Database
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+        ShowTable();
+    })
+};
+GetAllStudents()
+
+//Add Student in Database
+const AddStudentURL = 'http://localhost:5251/api/Student/Add-student';
+async function AddStudent(formData){
+    // Create new student
+    await fetch(AddStudentURL, {
+        method: "POST",
+        body:formData
+    });
+    GetAllStudents();
+    ShowTable();
+};
+
+//Update Student Contact Details
+const UpdateStudentURL = 'http://localhost:5251/api/Student/Update-Student';
+async function UpdateStudent(StudentNic , StudentUpdateData){
+    // Update Student
+    await fetch(`${UpdateStudentURL}/${StudentNic}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(StudentUpdateData)
+    });
+};
+
+// Delete Student From Database
+const DeleteStudentURL = 'http://localhost:5251/api/Student/Delete-Student'
+async function DeleteStudent(StudentNic){
+    // Delete Student
+    await fetch(`${DeleteStudentURL}/${StudentNic}`, {
+        method: "DELETE"
+    });
+    GetAllStudents()
+};
+
 
 //password Encryption
 function encryption(password){
