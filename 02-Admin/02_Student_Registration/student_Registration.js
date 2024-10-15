@@ -36,6 +36,18 @@ async function AddStudent(formData){
     ShowTable();
 };
 
+//Update Student Contact Details
+const UpdateStudentURL = 'http://localhost:5251/api/Student/Update-Student';
+async function UpdateStudent(StudentNic , StudentUpdateData){
+    // Update Student
+    await fetch(`${UpdateStudentURL}/${StudentNic}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(StudentUpdateData)
+    });
+};
 
 //password Encryption
 function encryption(password){
