@@ -49,6 +49,17 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
     });
 };
 
+// Delete Student From Database
+const DeleteStudentURL = 'http://localhost:5251/api/Student/Delete-Student'
+async function DeleteStudent(StudentNic){
+    // Delete Student
+    await fetch(`${DeleteStudentURL}/${StudentNic}`, {
+        method: "DELETE"
+    });
+    GetAllStudents()
+};
+
+
 //password Encryption
 function encryption(password){
     return btoa(password)
