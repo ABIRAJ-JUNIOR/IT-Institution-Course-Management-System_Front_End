@@ -24,6 +24,19 @@ async function GetAllStudents(){
 };
 GetAllStudents()
 
+//Add Student in Database
+const AddStudentURL = 'http://localhost:5251/api/Student/Add-student';
+async function AddStudent(formData){
+    // Create new student
+    await fetch(AddStudentURL, {
+        method: "POST",
+        body:formData
+    });
+    GetAllStudents();
+    ShowTable();
+};
+
+
 //password Encryption
 function encryption(password){
     return btoa(password)
