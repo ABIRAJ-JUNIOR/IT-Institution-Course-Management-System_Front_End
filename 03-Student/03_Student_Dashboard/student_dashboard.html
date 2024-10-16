@@ -49,10 +49,10 @@
             </ul>
         </nav>
     
-        <section class="main" id="home-container">
+        <section class="main" id="home-container" >
             <div class="logo-container">
                 <div class="main-top">
-                    <h1>Welcome</h1><h1 id="greeting"></h1>
+                    <h1>Welcome</h1><h1 id="greeting" class="greeting"></h1>
                 </div>
                 <div id="notification">
                     <i class="fa-solid fa-bell" id="notification"></i>
@@ -133,72 +133,47 @@
                         <div class="heading">
                             <h1>Personal</h1><h1>Information</h1>
                         </div>
+                       
                         <div class="profile-box">
                             <form id="profile-form">
-                                <table>
-                                    <tr>
-                                        <td><label for="nic">NIC Number</label></td>
-                                        <td><input type="text" id="nic" name="nic" disabled></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="fullname">Full Name</label></td>
-                                        <td><input type="text" id="fullname" name="fullname" disabled></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="email">Email</label></td>
-                                        <td><input type="email" id="email" name="email" disabled></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="phone">Phone</label></td>
-                                        <td><input type="tel" id="phone" name="phone" disabled></td>
-                                    </tr>
-                                </table>
-            
+                                <div class="form-group">
+                                    <label for="nic">NIC Number</label>
+                                    <input type="text" id="nic" name="nic" disabled>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="text" id="fullname" name="fullname" disabled>
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" disabled>
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" id="phone" name="phone" disabled>
+                                </div>
+                        
                                 <div id="button-container">
                                     <button type="button" class="main-btn" id="update-button">Update Profile</button>
-                                    <button type="button"  class="main-btn" id="save-button" >Save</button>
-                                    <button type="button"  class="main-btn" id="Cancel-button" >Cancel</button>
+                                    <button type="button" class="main-btn" id="save-button">Save</button>
+                                    <button type="button" class="main-btn" id="Cancel-button">Cancel</button>
                                 </div>
-            
                             </form>
                         </div>
-                    </section>
-        
-                    <section class="main-password-change">
-                        <div class="heading">
-                            <h1>Password</h1><h1>Change</h1>
-                        </div>
-                        <div class="password-box">
-                            <form id="password-form">
-                                <table>
-                                    <tr>
-                                        <td><label for="oldPassword">Old Password</label></td>
-                                        <td><input type="password" id="oldPassword" name="oldPassword" ></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="newPassword">New Password</label></td>
-                                        <td><input type="password" id="newPassword" name="newPassword" ></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="confirmPassword">Confirm Password</label></td>
-                                        <td><input type="password" id="confirmPassword" name="confirmPassword" ></td>
-                                    </tr>
-                                </table>
-            
-                                <div id="button-container">
-                                    <button type="button" class="main-btn" id="update-password">Update Password</button>
-                                </div>
-            
-                            </form>
-                        </div>
+                        
                     </section>
                 </div>
+                
                 <div class="col col2" >
                     <img src="./image/Students-amico.png" width="700px">
                 </div>
             </div>
-            
         </section>
+
+
     </div>
 
     <!-- pop up box -->
