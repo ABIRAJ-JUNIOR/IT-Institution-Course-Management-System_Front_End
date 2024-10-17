@@ -181,8 +181,7 @@ function removeCourseById(event,courseIdToRemove) {
     
     let indexToRemove = courses.findIndex(obj => obj.id === courseIdToRemove);
     if (indexToRemove !== -1) {
-        courses.splice(indexToRemove , 1)
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        DeleteCourse(courseIdToRemove)
         document.getElementById('course-offerings-message-2').style.color = "Green";
         document.getElementById('course-offerings-message-2').textContent = "Course Removed Successfully";
         const row = event.target.parentElement.parentElement;
