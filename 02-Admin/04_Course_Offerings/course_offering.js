@@ -28,6 +28,18 @@ async function AddCourse(CourseData){
     CoursesTable();
 };
 
+const UpdateCourseURL = 'http://localhost:5251/api/Course/Update-Course';
+//Update Course Fee
+async function UpdateCourseFee(CourseId , NewFee){
+    await fetch(`${UpdateCourseURL}/${CourseId}/${NewFee}`, {
+        method: "PUT",
+        // headers: {
+        //     "Content-Type": "application/json"
+        // },
+    });
+    GetAllCourses();
+    CoursesTable();
+};
 
 //Site Navebar
 const toggle = document.querySelector(".fa-bars")
