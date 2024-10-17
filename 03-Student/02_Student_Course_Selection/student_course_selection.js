@@ -121,7 +121,7 @@ function GetLastCourseEnrollId(){
     }    
 }
 
-//submit form
+///submit form
 document.getElementById("course-form").addEventListener('submit',(event)=>{
     event.preventDefault()
 
@@ -131,7 +131,7 @@ document.getElementById("course-form").addEventListener('submit',(event)=>{
     const ProficiencyLevels = document.getElementById("proficiency-levels").value; 
     const duration = document.getElementById("select-duration").value;
     const courseEnrollDate = new Date();
-    let id = Number(Math.floor(Math.random()*1000000))
+    let id = generateCourseEnrollID(lastCourseEnrollID);
 
     //Find the Student 
     const student = students.find(s => s.nic == nic);
@@ -139,29 +139,25 @@ document.getElementById("course-form").addEventListener('submit',(event)=>{
 
     if(student){
         if(cors){
-  
-            student.courseEnrollId = id;
-
             const CourseEnrollData = {
                 id,
                 nic,
                 courseId:cors.id,
                 duration,
-                installmentId:0,
-                fullPaymentId:0,
                 courseEnrollDate,
                 status:"Pending"
             }
 
-            courseEnrollData.push(CourseEnrollData);
-            localStorage.setItem('CourseEnrollDetails' , JSON.stringify(courseEnrollData));
-            localStorage.setItem('Students' , JSON.stringify(students));
-            
+            AddCourseEnrollData(CourseEnrollData)
+            UpdateCourseEnrollId(student.nic , id);
 
             document.getElementById('message').style.color = "green"
             document.getElementById('message').textContent = "Course Successfuly selected"
 
-            window.location.href = "../03_Student_Dashboard/student_dashboard.html"
+            setTimeout(()=>{
+                window.location.href = "../03_Student_Dashboard/student_dashboard.html"
+            }, 500);
+
             
         }else{
             document.getElementById('message').style.color = "red";
