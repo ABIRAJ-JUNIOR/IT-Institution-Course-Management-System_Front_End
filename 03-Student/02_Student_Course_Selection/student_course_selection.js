@@ -1,8 +1,17 @@
 const nic = JSON.parse(sessionStorage.getItem('NIC'));
 
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
+let students  = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+//Fetch Students Data from Database
+async function GetAllStudents(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+        StudentNameShow();
+    })
+};
+GetAllStudents()
 
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
