@@ -104,76 +104,90 @@ function GetLastInstallmentId(){
     }    
 }
 
-    //Form Submit Function
-    document.getElementById('fee-management-form').addEventListener('submit' ,(event) =>{
-        event.preventDefault();
-    
-    
-        const paymentplan = document.getElementById('payment-plan').value;
-        const nic = document.getElementById('nic').value.trim();
-        const student = students.find((student) => student.nic == nic);
-    
-        const CourseEnrollDetail = courseEnrollData.find(c => c.id == student.courseEnrollId)
-        const FullPayment = FullpaymentDetails.find(p => p.id == CourseEnrollDetail.fullPaymentId)
-    
-        const date = new Date();
-        let id = Number(Math.floor(Math.random()*1000000));
-    
-        if(paymentplan == "fullpayment"){
-    
-            if(CourseEnrollDetail.installmentId != 0 && CourseEnrollDetail.fullPaymentId == 0){
-                document.getElementById('fee-management-message').textContent = "Wrong Payment Method";
-                document.getElementById('fee-management-message').style.color = "red";
-            }else{
-                if(FullPayment && CourseEnrollDetail.status == "Active"){
-                    document.getElementById('fee-management-message').textContent = "Student already paid FullPayment";
-                }else{
-                    CourseEnrollDetail.fullPaymentId = id;
-                    CourseEnrollDetail.status = "Active";
+//Form Submit Function
+document.getElementById('fee-management-form').addEventListener('submit' ,(event) =>{
+    event.preventDefault();
 
-                    const FullPaymentData = {
-                        id,
-                        nic,
-                        fullPayment:totalAmount,
-                        paymentDate:date
-                    }
-                    FullpaymentDetails.push(FullPaymentData);
 
-                    localStorage.setItem('FullPaymentDetails',JSON.stringify(FullpaymentDetails));
-                    localStorage.setItem('CourseEnrollDetails',JSON.stringify(courseEnrollData));
+    const paymentplan = document.getElementById('payment-plan').value;
+    const nic = document.getElementById('nic').value.trim();
+    const student = students.find((student) => student.nic == nic);
 
-                    document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Full Payment`;
-                    displayFullPaymentTable();
-                }
-            }
-    
+    const CourseEnrollDetail = courseEnrollData.find(c => c.id == student.courseEnrollId)
+    const FullPayment = FullpaymentDetails.find(p => p.id == CourseEnrollDetail.fullPaymentId)
 
-        }
-        else if(paymentplan == "installment"){
-    
-            if(CourseEnrollDetail.fullPaymentId != 0 ){
-                document.getElementById('fee-management-message').textContent = "Student already paid Full payment";
-            }
-            else{
+    const date = new Date();
+    let fullPaymentid = generateFullPymentID(lastFullpaymentID);
+    let installmentid = generateInstallmentID(lastInstallmentID);
 
-                Installment(student,id,CourseEnrollDetail);
-            }
-    
+    if(paymentplan == "fullpayment"){
+
+        if(CourseEnrollDetail.installmentId != null && CourseEnrollDetail.fullPaymentId == null){
+            document.getElementById('fee-management-message').textContent = "Wrong Payment Method";
+            document.getElementById('fee-management-message').style.color = "red";
         }else{
-            document.getElementById('fee-management-message').textContent = "Please select the payment Plan";
+            if(FullPayment && CourseEnrollDetail.status == "Active"){
+                document.getElementById('fee-management-message').textContent = "Student already paid FullPayment";
+            }else{
+                // Update Payment Id in CourseEnroll Data
+                UpdatePaymentId(CourseEnrollDetail.id , null , fullPaymentid)
+
+                const Status = "Active" ;
+                // Update Status Of Course in CourseEnroll Data
+                UpdateStatus(CourseEnrollDetail.id , Status)
+
+                const FullPaymentData = {
+                    id:fullPaymentid,
+                    nic,
+                    fullPayment:totalAmount,
+                    paymentDate:date
+                }
+
+                const NotificationData = {
+                    nic,
+                    type:"FullPayment",
+                    sourceId:fullPaymentid,
+                    date:date
+                }
+
+                // Add Full payment Details
+                AddFullPayment(FullPaymentData);
+                // Add Payment Notification
+                AddNotification(NotificationData);
+
+                document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Full Payment`;
+                displayFullPaymentTable();
+            }
         }
+
+
+    }
+    else if(paymentplan == "installment"){
+
+
+        if(CourseEnrollDetail.fullPaymentId != null ){
+            document.getElementById('fee-management-message').textContent = "Student already paid Full payment";
+        }
+        else{
+
+            Installment(student,installmentid,CourseEnrollDetail);
+        }
+
+    }else{
+        document.getElementById('fee-management-message').textContent = "Please select the payment Plan";
+    }
+
+    setTimeout(()=>{
+        document.getElementById('fee-management-message').textContent = "";
+        }, 3000);
     
-        setTimeout(()=>{
-            document.getElementById('fee-management-message').textContent = "";
-            }, 3000);
-        
-        document.getElementById('total-course-fee').textContent = `0 Rs`;
-        document.getElementById('total-amount').textContent = `0 Rs`;
-        document.getElementById('installment-amount').textContent = `0 Rs`;
-    
-        event.target.reset();
-    
-    });
+    document.getElementById('total-course-fee').textContent = `0 Rs`;
+    document.getElementById('total-amount').textContent = `0 Rs`;
+    document.getElementById('installment-amount').textContent = `0 Rs`;
+
+    event.target.reset();
+
+});
     
     
     //Installment Calculation
