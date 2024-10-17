@@ -40,6 +40,17 @@ async function GetAllCourseEnrollData(){
 };
 GetAllCourseEnrollData()
 
+// Update CourseEnrollId in Student Table in Database
+const UpdateCourseEnrollIdURL = 'http://localhost:5251/api/Student/Update-CourseEnroll-Id';
+async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
+    await fetch(`${UpdateCourseEnrollIdURL}/${StudentNic}/${CourseEnrollId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+};
+
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
 async function DuplicateCourseRemove(){
