@@ -118,6 +118,20 @@ async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
     GetAllCourseEnrollData();
 }
 
+const AddInstallmentURL = 'http://localhost:5251/api/Installment/Add-installment';
+//Add Stud
+async function AddInstallment(InstallmentData){
+    await fetch(AddInstallmentURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(InstallmentData)
+    });
+    GetAllInstallments();
+    displayInstallmentPaymentTable();
+};
+
 const UpdateInstallmentURL = 'http://localhost:5251/api/Installment/Update-Installment';
 //Update Installments
 async function UpdateInstallment(installmentId , paidAmount){
