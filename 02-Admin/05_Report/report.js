@@ -290,8 +290,8 @@ const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-Full
             })
         }
     
-        if(InstallmentDetails){
-            InstallmentDetails.forEach((installment) =>{
+        if(InstallmentsDetails){
+            InstallmentsDetails.forEach((installment) =>{
                 paidInstallment += installment.paymentPaid
                 outStandingAmount += installment.paymentDue
             })
