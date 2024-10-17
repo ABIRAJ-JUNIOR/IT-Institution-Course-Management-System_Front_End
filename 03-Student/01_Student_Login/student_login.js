@@ -1,11 +1,30 @@
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
+let students  = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+async function GetAllStudents(){
+    //Fetch Students Data from Database
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents()
 
+let courseEnrollData = [];
+const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+async function GetAllCourseEnrollData(){
+    //Fetch Students Data from Database
+    fetch(GetAllCourseEnrollURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courseEnrollData = data;
+    })
+};
+GetAllCourseEnrollData()
 
 function encryption(password){
     return btoa(password)
 }
-
 document.getElementById('login-form').addEventListener('submit' , (event)=>{
     event.preventDefault();
 
@@ -15,9 +34,9 @@ document.getElementById('login-form').addEventListener('submit' , (event)=>{
     const student = students.find(s => s.nic == Nic && s.password == Password)
 
     if(student){
-        if(student.courseEnrollId == 0){
+        if(student.courseEnrollId == null){
             window.location.href = "../02_Student_Course_Selection/student_course_selection.html"
-        }else if(student.courseEnrollId != 0){
+        }else if(student.courseEnrollId != null){
             const SelectedCourse = courseEnrollData.find(c => c.id == student.courseEnrollId);
             if(SelectedCourse.status == "InActive" || SelectedCourse == null){
                  window.location.href = "../02_Student_Course_Selection/student_course_selection.html"
