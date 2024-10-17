@@ -61,6 +61,7 @@ async function GetAllStudents(){
 };
 GetAllStudents()
 
+
 const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
