@@ -79,6 +79,21 @@ async function GetAllFullPayments(){
 };
 GetAllFullPayments();
 
+
+const AddFullPaymentURL = 'http://localhost:5251/api/FullPayment/Add-FullPayment';
+//Add FullPayment data in Database
+async function AddFullPayment(FullPaymentData){
+    await fetch(AddFullPaymentURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(FullPaymentData)
+    });
+    GetAllFullPayments();
+    displayFullPaymentTable();
+};
+
 let totalAmount = 0;
 let installmentAmount = 0;
 
