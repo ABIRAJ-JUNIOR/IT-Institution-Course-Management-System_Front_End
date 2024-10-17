@@ -345,9 +345,9 @@ const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-Full
     })
     
     
-    //Logout function
+     //Logout function
     
-    function logout() {
+     function logout() {
         window.location.href = "../01_Admin_Login/admin_login.html";
     }
     
@@ -355,8 +355,7 @@ const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-Full
     logoutButton.addEventListener('click', function() {
       logout();
     });
-};
-    
+}
 
 
 
