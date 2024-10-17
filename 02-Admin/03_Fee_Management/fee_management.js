@@ -118,6 +118,17 @@ async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
     GetAllCourseEnrollData();
 }
 
+const UpdateInstallmentURL = 'http://localhost:5251/api/Installment/Update-Installment';
+//Update Installments
+async function UpdateInstallment(installmentId , paidAmount){
+    await fetch(`${UpdateInstallmentURL}/${installmentId}/${paidAmount}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+    });
+    GetAllInstallments();
+}
 
 let totalAmount = 0;
 let installmentAmount = 0;
