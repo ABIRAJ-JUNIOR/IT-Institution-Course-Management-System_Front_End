@@ -1,10 +1,14 @@
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
-
-
-function encryption(password){
-    return btoa(password)
-}
+let students  = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+async function GetAllStudents(){
+    //Fetch Students Data from Database
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents()
 
 document.getElementById('login-form').addEventListener('submit' , (event)=>{
     event.preventDefault();
