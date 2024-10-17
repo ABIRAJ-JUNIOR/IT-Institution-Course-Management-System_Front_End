@@ -245,7 +245,7 @@ const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-Full
 
             students.forEach((student) => {
                 const CourseEnrollDetails = courseEnrollData.find(c => c.id == student.courseEnrollId);
-                if(student.courseEnrollId != 0){
+                if(student.courseEnrollId != null){
                     const coursedetails = courses.find(c => c.id == CourseEnrollDetails.courseId);
 
                     if(coursedetails.courseName == course.courseName && coursedetails.level == course.level ){
