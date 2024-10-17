@@ -19,55 +19,57 @@ let InstallmentDetails  = JSON.parse(localStorage.getItem('InstallmentDetails'))
 let FullpaymentDetails  = JSON.parse(localStorage.getItem('FullPaymentDetails')) || [];
 
 
-document.addEventListener("DOMContentLoaded" , ()=> {
-    let totalAmount = 0;
-    let installmentAmount = 0;
-    
-    document.getElementById('nic').addEventListener("keyup" , () =>{
-        const nic = document.getElementById('nic').value.trim();
-        const student = students.find((student) => student.nic == nic);
-                
-        if(student){
-            if(student.courseEnrollId != 0){
-                const CourseEnrollDetail = courseEnrollData.find(c => c.id === student.courseEnrollId);
-                const CourseDetails = courses.find(c => c.id == CourseEnrollDetail.courseId)
-    
-                if(CourseEnrollDetail != null){
-                    document.getElementById('fee-management-message').textContent = student.fullName;
-                    document.getElementById('fee-management-message').style.color = "green";
-        
-                    courses.forEach(element => {
-                        if(element.courseName == CourseDetails.courseName && element.level == CourseDetails.level){
-                            document.getElementById('total-course-fee').textContent = `${element.totalFee} Rs`;
-                            document.getElementById('total-amount').textContent = `${element.totalFee} Rs`;
-                            if(CourseEnrollDetail.duration == "3"){
-                                installmentAmount = element.totalFee / 3;
-                                document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
-                            }else if(CourseEnrollDetail.duration == "6"){
-                                    installmentAmount = element.totalFee / 6;
-                                    document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
-                            }
-                            totalAmount = element.totalFee;
-                        }
-                    });
-        
-                }
+let totalAmount = 0;
+let installmentAmount = 0;
 
-            }else{
-                document.getElementById('fee-management-message').textContent = `${student.fullName} didnt select a course`;
-                document.getElementById('fee-management-message').style.color = "red";
-                document.getElementById('total-course-fee').textContent = `0 Rs`;
-                document.getElementById('total-amount').textContent = `0 Rs`;
-                document.getElementById('installment-amount').textContent = `0 Rs`;
+document.getElementById('nic').addEventListener("keyup" , () =>{
+    const nic = document.getElementById('nic').value.trim();
+    const student = students.find((student) => student.nic == nic);
+            
+    if(student){
+        if(student.courseEnrollId != null){
+            const CourseEnrollDetail = courseEnrollData.find(c => c.id === student.courseEnrollId);
+            const CourseDetails = courses.find(c => c.id == CourseEnrollDetail.courseId)
+
+            if(CourseEnrollDetail != null){
+                document.getElementById('fee-management-message').textContent = student.fullName;
+                document.getElementById('fee-management-message').style.color = "green";
+    
+                courses.forEach(element => {
+                    if(element.courseName == CourseDetails.courseName && element.level == CourseDetails.level){
+                        document.getElementById('total-course-fee').textContent = `${element.totalFee} Rs`;
+                        document.getElementById('total-amount').textContent = `${element.totalFee} Rs`;
+                        if(CourseEnrollDetail.duration == "3"){
+                            installmentAmount = element.totalFee / 3;
+                            document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
+                        }else if(CourseEnrollDetail.duration == "6"){
+                                installmentAmount = element.totalFee / 6;
+                                document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
+                        }
+                        totalAmount = element.totalFee;
+                    }
+                });
+    
             }
-    
+
         }else{
-            document.getElementById('fee-management-message').textContent = "Student not found";
+            document.getElementById('fee-management-message').textContent = `${student.fullName} didnt select a course`;
             document.getElementById('fee-management-message').style.color = "red";
+            document.getElementById('total-course-fee').textContent = `0 Rs`;
+            document.getElementById('total-amount').textContent = `0 Rs`;
+            document.getElementById('installment-amount').textContent = `0 Rs`;
         }
-    
-    });
-    
+
+    }else{
+        document.getElementById('fee-management-message').textContent = "Student not found";
+        document.getElementById('fee-management-message').style.color = "red";
+    }
+
+    if(nic.length == 0){
+        document.getElementById('fee-management-message').textContent = "";
+    }
+
+});
 
     //Form Submit Function
     document.getElementById('fee-management-form').addEventListener('submit' ,(event) =>{
@@ -263,5 +265,5 @@ document.addEventListener("DOMContentLoaded" , ()=> {
     logoutButton.addEventListener('click', function() {
       logout();
     });
-});
+
 
