@@ -49,7 +49,19 @@ async function DeleteCourse(CourseId){
     });
 };
 
+let students = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+async function GetAllStudents(){
+    //Fetch Students Data from Database
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
 
+
+GetAllStudents()
 //Site Navebar
 const toggle = document.querySelector(".fa-bars")
 const toggleClose = document.querySelector(".fa-xmark")
