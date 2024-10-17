@@ -11,11 +11,18 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%";
 })
 
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
-let InstallmentDetails  = JSON.parse(localStorage.getItem('InstallmentDetails')) || [];
-let FullpaymentDetails  = JSON.parse(localStorage.getItem('FullPaymentDetails')) || [];
+let students  = [];
+
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+//Fetch Students Data from Database
+async function GetAllStudents(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents()
 
 
 document.addEventListener("DOMContentLoaded",()=>{
