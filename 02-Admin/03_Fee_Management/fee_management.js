@@ -190,52 +190,68 @@ document.getElementById('fee-management-form').addEventListener('submit' ,(event
 });
     
     
-    //Installment Calculation
-    function Installment(student,paymentId,CourseEnrollDetail){
-        // Today Date 
-        const today = new Date();
-    
-        const studentInstallment = InstallmentDetails.find((installment) => installment.id == CourseEnrollDetail.installmentId)
-    
-        if(studentInstallment != null && CourseEnrollDetail.status != "Pending"){
-            if(studentInstallment.paymentDue <= 0){
-                document.getElementById('fee-management-message').style.color = "green";
-                document.getElementById('fee-management-message').textContent = `${student.fullName} paid Full installment plan`;
-            }else{
-                studentInstallment.paymentDue -= installmentAmount
-                studentInstallment.paymentPaid += installmentAmount
-                studentInstallment.paymentDate = today;
-                localStorage.setItem('InstallmentDetails',JSON.stringify(InstallmentDetails));
-                document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Installment Payment`;
-                displayInstallmentPaymentTable();
-            }
-            
+//Installment Calculation
+function Installment(student,paymentId,CourseEnrollDetail){
+    // Today Date 
+    const today = new Date();
+
+    const studentInstallment = InstallmentDetails.find((installment) => installment.id == CourseEnrollDetail.installmentId)
+
+    if(studentInstallment != null && CourseEnrollDetail.status != "Pending"){
+        if(studentInstallment.paymentDue <= 0){
+            document.getElementById('fee-management-message').style.color = "green";
+            document.getElementById('fee-management-message').textContent = `${student.fullName} paid Full installment plan`;
         }else{
-            let paymentDue = totalAmount - installmentAmount
-
-            CourseEnrollDetail.installmentId = paymentId;
-            CourseEnrollDetail.status = "Active";
-
-            const InstallmentData = {
-                id:paymentId,
+            const NotificationData = {
                 nic:student.nic,
-                totalAmount,
-                installmentAmount,
-                installments:CourseEnrollDetail.duration,
-                paymentDue,
-                paymentPaid:installmentAmount,
-                paymentDate:today
-            }
+                type:"Installment",
+                sourceId:studentInstallment.id,
+                date:today
+            };
 
-            InstallmentDetails.push(InstallmentData);
-
-            localStorage.setItem('InstallmentDetails',JSON.stringify(InstallmentDetails));
-            localStorage.setItem('CourseEnrollDetails',JSON.stringify(courseEnrollData));
-
-            document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Installment Payment`
-            displayInstallmentPaymentTable();
+            //Update Installment details
+            UpdateInstallment(studentInstallment.id , installmentAmount);
+            //Add notification 
+            AddNotification(NotificationData);
+            document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Installment Payment`;
         }
+        
+    }else{
+        let paymentDue = totalAmount - installmentAmount
+        // Update PaymentId in CourseEnroll Data
+        UpdatePaymentId(CourseEnrollDetail.id , paymentId , null)
+
+        const Status = "Active" ;
+        // Update Status Of Course in CourseEnroll Data
+        UpdateStatus(CourseEnrollDetail.id , Status)
+
+        const InstallmentData = {
+            id:paymentId,
+            nic:student.nic,
+            totalAmount,
+            installmentAmount,
+            installments:CourseEnrollDetail.duration,
+            paymentDue,
+            paymentPaid:installmentAmount,
+            paymentDate:today
+        }
+
+        const NotificationData = {
+            nic:student.nic,
+            type:"Installment",
+            sourceId:paymentId,
+            date:today
+        };
+
+        // Add Installment Details
+        AddInstallment(InstallmentData);
+        // Add Notification
+        AddNotification(NotificationData);
+        document.getElementById('fee-management-message').textContent = `${student.fullName} Paid Installment Payment`
+        displayInstallmentPaymentTable();
     }
+}
+
     
     
     
