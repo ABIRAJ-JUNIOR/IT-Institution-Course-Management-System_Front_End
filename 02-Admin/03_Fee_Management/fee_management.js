@@ -12,12 +12,12 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%";
 })
 
+
 let students  = [];
 let courses = [];
 let courseEnrollData = [];
 let InstallmentDetails  = [];
 let FullpaymentDetails  = [];
-
 
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
 //Fetch Students Data from Database
@@ -29,6 +29,7 @@ async function GetAllStudents(){
     })
 };
 GetAllStudents();
+
 
 const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
@@ -79,7 +80,6 @@ async function GetAllFullPayments(){
 };
 GetAllFullPayments();
 
-
 const AddFullPaymentURL = 'http://localhost:5251/api/FullPayment/Add-FullPayment';
 //Add FullPayment data in Database
 async function AddFullPayment(FullPaymentData){
@@ -93,6 +93,7 @@ async function AddFullPayment(FullPaymentData){
     GetAllFullPayments();
     displayFullPaymentTable();
 };
+
 
 const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
 //Update CourseEnroll Status
@@ -118,6 +119,18 @@ async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
     GetAllCourseEnrollData();
 }
 
+const UpdateInstallmentURL = 'http://localhost:5251/api/Installment/Update-Installment';
+//Update Installments
+async function UpdateInstallment(installmentId , paidAmount){
+    await fetch(`${UpdateInstallmentURL}/${installmentId}/${paidAmount}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+    });
+    GetAllInstallments();
+}
+
 const AddInstallmentURL = 'http://localhost:5251/api/Installment/Add-installment';
 //Add Stud
 async function AddInstallment(InstallmentData){
@@ -132,18 +145,6 @@ async function AddInstallment(InstallmentData){
     displayInstallmentPaymentTable();
 };
 
-const UpdateInstallmentURL = 'http://localhost:5251/api/Installment/Update-Installment';
-//Update Installments
-async function UpdateInstallment(installmentId , paidAmount){
-    await fetch(`${UpdateInstallmentURL}/${installmentId}/${paidAmount}`,{
-        method:"PUT",
-        headers:{
-            "Content-Type":"application/json"
-        },
-    });
-    GetAllInstallments();
-}
-
 const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
@@ -156,6 +157,9 @@ async function AddNotification(NotificationData){
 
     })
 }
+
+
+
 
 let totalAmount = 0;
 let installmentAmount = 0;
@@ -326,8 +330,8 @@ document.getElementById('fee-management-form').addEventListener('submit' ,(event
     event.target.reset();
 
 });
-    
-    
+
+
 //Installment Calculation
 function Installment(student,paymentId,CourseEnrollDetail){
     // Today Date 
@@ -390,9 +394,8 @@ function Installment(student,paymentId,CourseEnrollDetail){
     }
 }
 
-    
-    
-    
+
+
 //Pop up box For Payment details
 document.getElementById("student-payment-details").addEventListener("click" , ()=>{
     document.getElementById("overlay").style.display ="block"
@@ -423,7 +426,7 @@ function displayInstallmentPaymentTable(){
     });
 }
 displayInstallmentPaymentTable();
-    
+
 //Full Payment Table
 
 function displayFullPaymentTable(){
@@ -444,8 +447,9 @@ function displayFullPaymentTable(){
     })
 }
 displayFullPaymentTable();
-    
-    
+
+
+
 document.getElementById("installment-btn").addEventListener('click',() =>{
     document.querySelector("#table-1").style.display = "block"
     document.querySelector("#table-2").style.display = "none"
@@ -465,5 +469,4 @@ const logoutButton = document.getElementById('logoutButton');
 logoutButton.addEventListener('click', function() {
     logout();
 });
-
 
