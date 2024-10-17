@@ -112,10 +112,9 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
     const totalFee = Number(document.getElementById("fee").value.trim());
     let id = generateCourseID(lastCourseID);
 
-    const course = courses.find(c=>c.courseName == courseName && c.level == level)
+    const course = courses.find(c=>c.courseName.toLowerCase() == courseName.toLowerCase() && c.level == level)
     if(course){
-        course.totalFee = totalFee;
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        UpdateCourseFee(course.id , totalFee)
         document.getElementById('course-offerings-message').innerHTML = "Update Fee Successfully"
     }else{
         const CourseData = {
@@ -124,9 +123,17 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
             level,
             totalFee
         };
-        
-        courses.push(CourseData);
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        AddCourse(CourseData);
+
+        students.forEach(s => {
+            const NotificationData ={
+                nic:s.nic,
+                type:"Course",
+                sourceId:id,
+                date:new Date()
+            }
+            AddNotification(NotificationData);
+        });
 
         document.getElementById('course-offerings-message').innerHTML = "Added New Course"
     }
