@@ -34,9 +34,9 @@ document.getElementById('login-form').addEventListener('submit' , (event)=>{
     const student = students.find(s => s.nic == Nic && s.password == Password)
 
     if(student){
-        if(student.courseEnrollId == 0){
+        if(student.courseEnrollId == null){
             window.location.href = "../02_Student_Course_Selection/student_course_selection.html"
-        }else if(student.courseEnrollId != 0){
+        }else if(student.courseEnrollId != null){
             const SelectedCourse = courseEnrollData.find(c => c.id == student.courseEnrollId);
             if(SelectedCourse.status == "InActive" || SelectedCourse == null){
                  window.location.href = "../02_Student_Course_Selection/student_course_selection.html"
