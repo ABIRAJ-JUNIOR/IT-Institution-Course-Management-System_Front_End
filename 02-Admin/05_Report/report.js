@@ -14,6 +14,7 @@ toggleClose.addEventListener("click" , function(){
 let students  = [];
 let courses = [];
 let courseEnrollData = [];
+let InstallmentsDetails  = [];
 
 
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
@@ -49,6 +50,16 @@ const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-En
 };
 GetAllCourseEnrollData()
 
+const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+                        //Fetch Installments Data from Database
+                        async function GetAllInstallments(){
+                            fetch(GetAllInstallmentsURL).then((response) => {
+                                return response.json();
+                            }).then((data) => {
+                                InstallmentsDetails = data;
+                            })
+                        };
+ GetAllInstallments()
 
 
 document.addEventListener("DOMContentLoaded",()=>{
