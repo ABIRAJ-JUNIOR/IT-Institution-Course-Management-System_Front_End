@@ -10,6 +10,21 @@ async function GetAllStudents(){
 };
 GetAllStudents()
 
+let courseEnrollData = [];
+const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+async function GetAllCourseEnrollData(){
+    //Fetch Students Data from Database
+    fetch(GetAllCourseEnrollURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courseEnrollData = data;
+    })
+};
+GetAllCourseEnrollData()
+
+function encryption(password){
+    return btoa(password)
+}
 document.getElementById('login-form').addEventListener('submit' , (event)=>{
     event.preventDefault();
 
