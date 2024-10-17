@@ -13,6 +13,20 @@ async function GetAllStudents(){
 };
 GetAllStudents()
 
+let courses = [];
+const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+//Fetch Students Data from Database
+async function GetAllCourses(){
+    fetch(GetAllCoursesURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courses = data;
+        DuplicateCourseRemove();
+
+    })
+};
+GetAllCourses()
+
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
 async function DuplicateCourseRemove(){
