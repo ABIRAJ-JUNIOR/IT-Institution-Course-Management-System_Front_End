@@ -106,6 +106,18 @@ async function UpdateStatus(CourseEnrollId , Status){
     GetAllCourseEnrollData();
 }
 
+const UpdatePaymentIdURL = 'http://localhost:5251/api/CourseEnroll/Add-payment-Id';
+//Update CourseEnroll PaymentId
+async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
+    await fetch(`${UpdatePaymentIdURL}/${CourseEnrollId}/${InstallmentId}/${FullPaymentId}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+    });
+    GetAllCourseEnrollData();
+}
+
 
 let totalAmount = 0;
 let installmentAmount = 0;
