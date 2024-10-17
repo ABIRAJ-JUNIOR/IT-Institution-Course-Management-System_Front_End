@@ -13,6 +13,7 @@ toggleClose.addEventListener("click" , function(){
 })
 
 let students  = [];
+let courses = [];
 
 
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
@@ -25,6 +26,17 @@ async function GetAllStudents(){
     })
 };
 GetAllStudents();
+
+const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+//Fetch Students Data from Database
+async function GetAllCourses(){
+    fetch(GetAllCoursesURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courses = data;
+    })
+};
+GetAllCourses();
 
 let totalAmount = 0;
 let installmentAmount = 0;
