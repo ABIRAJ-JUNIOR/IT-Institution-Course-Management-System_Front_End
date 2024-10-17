@@ -104,6 +104,22 @@ function StudentNameShow(){
 //disabled nic input 
 document.getElementById("nic").disabled = true
 
+// Generate Enroll ID
+function generateCourseEnrollID(lastID) {
+    let numericPart = parseInt(lastID.slice(1));
+    numericPart++;
+    let newID = "E" + numericPart.toString().padStart(3, "0");
+    return newID;
+}
+
+let lastCourseEnrollID;
+function GetLastCourseEnrollId(){
+    if(courseEnrollData.length != 0){
+        lastCourseEnrollID = courseEnrollData[courseEnrollData.length - 1].id
+    }else{
+        lastCourseEnrollID = "E000";
+    }    
+}
 
 //submit form
 document.getElementById("course-form").addEventListener('submit',(event)=>{
