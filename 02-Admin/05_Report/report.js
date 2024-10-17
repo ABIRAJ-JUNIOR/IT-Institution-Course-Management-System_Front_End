@@ -15,6 +15,7 @@ let students  = [];
 let courses = [];
 let courseEnrollData = [];
 let InstallmentsDetails  = [];
+let FullpaymentDetails  = [];
 
 
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
@@ -61,6 +62,17 @@ const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Ins
                         };
  GetAllInstallments()
 
+const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+ //Fetch Fullpayments Data from Database
+ async function GetAllFullPayments(){
+     fetch(GetAllFullPaymentURL).then((response) => {
+         return response.json();
+     }).then((data) => {
+         FullpaymentDetails = data;
+         DataActivate();
+     })
+ };
+ GetAllFullPayments()
 
 document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById("report-generate-btn").addEventListener("click",()=>{
