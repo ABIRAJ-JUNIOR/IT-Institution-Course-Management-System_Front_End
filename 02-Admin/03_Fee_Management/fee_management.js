@@ -12,12 +12,19 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%";
 })
 
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
-let InstallmentDetails  = JSON.parse(localStorage.getItem('InstallmentDetails')) || [];
-let FullpaymentDetails  = JSON.parse(localStorage.getItem('FullPaymentDetails')) || [];
+let students  = [];
 
+
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+//Fetch Students Data from Database
+async function GetAllStudents(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents();
 
 let totalAmount = 0;
 let installmentAmount = 0;
@@ -255,78 +262,77 @@ function Installment(student,paymentId,CourseEnrollDetail){
     
     
     
-    //Pop up box For Payment details
-    document.getElementById("student-payment-details").addEventListener("click" , ()=>{
-        document.getElementById("overlay").style.display ="block"
-        document.getElementById("popupbox").style.display ="block"
+//Pop up box For Payment details
+document.getElementById("student-payment-details").addEventListener("click" , ()=>{
+    document.getElementById("overlay").style.display ="block"
+    document.getElementById("popupbox").style.display ="block"
+});
+
+document.getElementById("overlay").addEventListener("click" , ()=>{
+    document.getElementById("overlay").style.display ="none"
+    document.getElementById("popupbox").style.display ="none"
+});
+
+//Installment Payment Table
+function displayInstallmentPaymentTable(){
+
+    const tableBody = document.getElementById('table-body-installment');
+    tableBody.innerHTML = "";
+    InstallmentDetails.forEach((installment) => {
+        const student = students.find(s => s.nic == installment.nic)
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${installment.id}</td>
+            <td>${student.fullName}</td>
+            <td>${installment.installmentAmount}/= </td>
+            <td>${installment.paymentPaid}/= </td>
+            <td>${installment.paymentDue}/= </td>
+        `;
+        tableBody.appendChild(row);
     });
+}
+displayInstallmentPaymentTable();
     
-    document.getElementById("overlay").addEventListener("click" , ()=>{
-        document.getElementById("overlay").style.display ="none"
-        document.getElementById("popupbox").style.display ="none"
-    });
-    
-    //Installment Payment Table
-    function displayInstallmentPaymentTable(){
-    
-        const tableBody = document.getElementById('table-body-installment');
-        tableBody.innerHTML = "";
-        InstallmentDetails.forEach((installment) => {
-            const student = students.find(s => s.nic == installment.nic)
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${installment.id}</td>
-                <td>${student.fullName}</td>
-                <td>${installment.installmentAmount}/= </td>
-                <td>${installment.paymentPaid}/= </td>
-                <td>${installment.paymentDue}/= </td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-    displayInstallmentPaymentTable();
-    
-    //Full Payment Table
-    
-    function displayFullPaymentTable(){
-    
-        const table = document.getElementById('table-body-fullpayment');
-        table.innerHTML = "";
-        FullpaymentDetails.forEach((fullpayment) => {
-            const student = students.find(s => s.nic == fullpayment.nic);
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${fullpayment.id}</td>
-                <td>${fullpayment.nic}</td>
-                <td>${student.fullName}</td>
-                <td>${fullpayment.fullPayment}/= </td>
-                <td>${fullpayment.fullPayment}/= </td>
-            `;
-            table.appendChild(row);
-        })
-    }
-    displayFullPaymentTable();
-    
-    
-    
-    document.getElementById("installment-btn").addEventListener('click',() =>{
-        document.querySelector("#table-1").style.display = "block"
-        document.querySelector("#table-2").style.display = "none"
+//Full Payment Table
+
+function displayFullPaymentTable(){
+
+    const table = document.getElementById('table-body-fullpayment');
+    table.innerHTML = "";
+    FullpaymentDetails.forEach((fullpayment) => {
+        const student = students.find(s => s.nic == fullpayment.nic);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${fullpayment.id}</td>
+            <td>${fullpayment.nic}</td>
+            <td>${student.fullName}</td>
+            <td>${fullpayment.fullPayment}/= </td>
+            <td>${fullpayment.fullPayment}/= </td>
+        `;
+        table.appendChild(row);
     })
-    document.getElementById("full-payment-btn").addEventListener('click',() =>{
-        document.querySelector("#table-1").style.display = "none"
-        document.querySelector("#table-2").style.display = "block"
-    })
+}
+displayFullPaymentTable();
     
     
-    //Logout function
-    function logout() {
-        window.location.href = "../01_Admin_Login/admin_login.html";
-    }
-    
-    const logoutButton = document.getElementById('logoutButton');
-    logoutButton.addEventListener('click', function() {
-      logout();
-    });
+document.getElementById("installment-btn").addEventListener('click',() =>{
+    document.querySelector("#table-1").style.display = "block"
+    document.querySelector("#table-2").style.display = "none"
+})
+document.getElementById("full-payment-btn").addEventListener('click',() =>{
+    document.querySelector("#table-1").style.display = "none"
+    document.querySelector("#table-2").style.display = "block"
+})
+
+
+//Logout function
+function logout() {
+    window.location.href = "../01_Admin_Login/admin_login.html";
+}
+
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', function() {
+    logout();
+});
 
 
