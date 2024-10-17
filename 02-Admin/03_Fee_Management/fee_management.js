@@ -94,6 +94,19 @@ async function AddFullPayment(FullPaymentData){
     displayFullPaymentTable();
 };
 
+const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
+//Update CourseEnroll Status
+async function UpdateStatus(CourseEnrollId , Status){
+    await fetch(`${UpdateStatusURL}/${CourseEnrollId}/${Status}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+    });
+    GetAllCourseEnrollData();
+}
+
+
 let totalAmount = 0;
 let installmentAmount = 0;
 
