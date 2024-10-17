@@ -1,5 +1,19 @@
 //Courses retrive from Local storage
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
+let courses = [];
+
+const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+//Fetch Students Data from Database
+async function GetAllCourses(){
+    fetch(GetAllCoursesURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courses = data;
+        CoursesTable();
+        GetLastCourseId();
+    })
+};
+GetAllCourses()
+
 
 
 
