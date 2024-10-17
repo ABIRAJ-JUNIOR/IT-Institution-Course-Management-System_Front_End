@@ -74,7 +74,7 @@ const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-Full
  };
  GetAllFullPayments()
 
-document.addEventListener("DOMContentLoaded",()=>{
+ function DataActivate(){
     document.getElementById("report-generate-btn").addEventListener("click",()=>{
         const nic = document.getElementById("search-by-nic").value.trim();
         const student = students.find((student)=>student.nic == nic);
@@ -85,27 +85,26 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         
         if(student){
-            if(student.courseEnrollId != 0){
+            if(student.courseEnrollId != null){
                 CourseEnrollDetails = courseEnrollData.find(c => c.id == student.courseEnrollId)
-                coursedetails = courses.find(c => c.courseID == CourseEnrollDetails.courseID)
+                coursedetails = courses.find(c => c.id == CourseEnrollDetails.courseId)
     
-                if(CourseEnrollDetails.installmentId != 0){
-                    installment = InstallmentDetails.find(i => i.id == CourseEnrollDetails.installmentId);
-                    console.log(installment)
+                if(CourseEnrollDetails.installmentId != null){
+                    installment = InstallmentsDetails.find(i => i.id == CourseEnrollDetails.installmentId);
                 }
-                if(CourseEnrollDetails.fullPaymentId != 0){
+                if(CourseEnrollDetails.fullPaymentId != null){
                     fullPayment = FullpaymentDetails.find(f => f.id == CourseEnrollDetails.fullPaymentId)
                 }
                 
-                if(CourseEnrollDetails.fullPaymentId != 0){
+                if(CourseEnrollDetails.fullPaymentId != null){
                     ShowFullPaymentStudentDetails(student , coursedetails , CourseEnrollDetails ,fullPayment);
-                }else if(CourseEnrollDetails.installmentId != 0){
+                }else if(CourseEnrollDetails.installmentId != null){
                     ShowInstallmentStudentDetails(student,installment,CourseEnrollDetails,coursedetails);
                 }else if(CourseEnrollDetails.status == "Pending"){
                     StudentWhoDidntPay(student , coursedetails ,CourseEnrollDetails);
                 }
             }else{
-                if(student.courseEnrollId == 0 || CourseEnrollDetails.status == "InActive"){
+                if(student.courseEnrollId == null || CourseEnrollDetails.status == "InActive"){
                     StudentWhoDidntSelectACourse(student);
                 }
             }
@@ -356,7 +355,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     logoutButton.addEventListener('click', function() {
       logout();
     });
-});
+};
     
 
 
