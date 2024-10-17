@@ -138,7 +138,7 @@ main{
     height: 100%;
     padding-bottom: 40px;
     background-color:antiquewhite;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
 }
@@ -207,7 +207,9 @@ label{
 
 
 /* Course Enrollment */
-
+.course-enrollment{
+    height: 88%;
+}
 #table-container{
     margin-top: 20px;
     display: flex;
@@ -215,7 +217,8 @@ label{
     padding-bottom: 25px;
     position: relative;
     overflow: auto;
-    height: 85%;
+    scrollbar-width: none;
+    height: 80%;
     padding: 0px 25px;
 }
 #table-container > table{
@@ -229,7 +232,7 @@ label{
 }
 th{
     border:2px solid black;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 #table-container > table td{
    border-bottom: 2px solid black;
@@ -243,7 +246,7 @@ th{
     justify-content: space-evenly;
     align-items: center;
     gap: 100px;
-    height: 450px;
+    height: 480px;
 }
 
 .chart-container{

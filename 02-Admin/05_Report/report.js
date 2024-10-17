@@ -11,14 +11,70 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%";
 })
 
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
-let InstallmentDetails  = JSON.parse(localStorage.getItem('InstallmentDetails')) || [];
-let FullpaymentDetails  = JSON.parse(localStorage.getItem('FullPaymentDetails')) || [];
+let students  = [];
+let courses = [];
+let courseEnrollData = [];
+let InstallmentsDetails  = [];
+let FullpaymentDetails  = [];
 
 
-document.addEventListener("DOMContentLoaded",()=>{
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+//Fetch Students Data from Database
+async function GetAllStudents(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents()
+
+const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+        //Fetch Students Data from Database
+        async function GetAllCourses(){
+            fetch(GetAllCoursesURL).then((response) => {
+                return response.json();
+            }).then((data) => {
+                courses = data;
+            })
+};
+GetAllCourses()
+
+const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+                //Fetch CourseEnrollData Data from Database
+                async function GetAllCourseEnrollData(){
+                    fetch(GetAllCourseEnrollURL).then((response) => {
+                        return response.json();
+                    }).then((data) => {
+                        courseEnrollData = data;
+                    })
+};
+GetAllCourseEnrollData()
+
+const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+                        //Fetch Installments Data from Database
+                        async function GetAllInstallments(){
+                            fetch(GetAllInstallmentsURL).then((response) => {
+                                return response.json();
+                            }).then((data) => {
+                                InstallmentsDetails = data;
+                            })
+                        };
+ GetAllInstallments()
+
+const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+ //Fetch Fullpayments Data from Database
+ async function GetAllFullPayments(){
+     fetch(GetAllFullPaymentURL).then((response) => {
+         return response.json();
+     }).then((data) => {
+         FullpaymentDetails = data;
+         DataActivate();
+     })
+ };
+ GetAllFullPayments()
+
+ function DataActivate(){
     document.getElementById("report-generate-btn").addEventListener("click",()=>{
         const nic = document.getElementById("search-by-nic").value.trim();
         const student = students.find((student)=>student.nic == nic);
@@ -29,27 +85,26 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         
         if(student){
-            if(student.courseEnrollId != 0){
+            if(student.courseEnrollId != null){
                 CourseEnrollDetails = courseEnrollData.find(c => c.id == student.courseEnrollId)
-                coursedetails = courses.find(c => c.courseID == CourseEnrollDetails.courseID)
+                coursedetails = courses.find(c => c.id == CourseEnrollDetails.courseId)
     
-                if(CourseEnrollDetails.installmentId != 0){
-                    installment = InstallmentDetails.find(i => i.id == CourseEnrollDetails.installmentId);
-                    console.log(installment)
+                if(CourseEnrollDetails.installmentId != null){
+                    installment = InstallmentsDetails.find(i => i.id == CourseEnrollDetails.installmentId);
                 }
-                if(CourseEnrollDetails.fullPaymentId != 0){
+                if(CourseEnrollDetails.fullPaymentId != null){
                     fullPayment = FullpaymentDetails.find(f => f.id == CourseEnrollDetails.fullPaymentId)
                 }
                 
-                if(CourseEnrollDetails.fullPaymentId != 0){
+                if(CourseEnrollDetails.fullPaymentId != null){
                     ShowFullPaymentStudentDetails(student , coursedetails , CourseEnrollDetails ,fullPayment);
-                }else if(CourseEnrollDetails.installmentId != 0){
+                }else if(CourseEnrollDetails.installmentId != null){
                     ShowInstallmentStudentDetails(student,installment,CourseEnrollDetails,coursedetails);
                 }else if(CourseEnrollDetails.status == "Pending"){
                     StudentWhoDidntPay(student , coursedetails ,CourseEnrollDetails);
                 }
             }else{
-                if(student.courseEnrollId == 0 || CourseEnrollDetails.status == "InActive"){
+                if(student.courseEnrollId == null || CourseEnrollDetails.status == "InActive"){
                     StudentWhoDidntSelectACourse(student);
                 }
             }
@@ -190,7 +245,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
             students.forEach((student) => {
                 const CourseEnrollDetails = courseEnrollData.find(c => c.id == student.courseEnrollId);
-                if(student.courseEnrollId != 0){
+                if(student.courseEnrollId != null){
                     const coursedetails = courses.find(c => c.id == CourseEnrollDetails.courseId);
 
                     if(coursedetails.courseName == course.courseName && coursedetails.level == course.level ){
@@ -235,8 +290,8 @@ document.addEventListener("DOMContentLoaded",()=>{
             })
         }
     
-        if(InstallmentDetails){
-            InstallmentDetails.forEach((installment) =>{
+        if(InstallmentsDetails){
+            InstallmentsDetails.forEach((installment) =>{
                 paidInstallment += installment.paymentPaid
                 outStandingAmount += installment.paymentDue
             })
@@ -290,9 +345,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     })
     
     
-    //Logout function
+     //Logout function
     
-    function logout() {
+     function logout() {
         window.location.href = "../01_Admin_Login/admin_login.html";
     }
     
@@ -300,8 +355,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     logoutButton.addEventListener('click', function() {
       logout();
     });
-});
-    
+}
 
 
 
