@@ -59,9 +59,21 @@ async function GetAllStudents(){
         students = data;
     })
 };
-
-
 GetAllStudents()
+
+const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+// Add Notifications
+async function AddNotification(NotificationData){
+    await fetch(AddNotificationURL,{
+        method:'Post',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(NotificationData)
+
+    })
+}
+
 //Site Navebar
 const toggle = document.querySelector(".fa-bars")
 const toggleClose = document.querySelector(".fa-xmark")
