@@ -87,21 +87,20 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%"
 })
 
-
 function generateCourseID(lastID) {
     let numericPart = parseInt(lastID.slice(1));
     numericPart++;
     let newID = "C" + numericPart.toString().padStart(3, "0");
-    lastCourseID = newID
     return newID;
 }
 
-
 let lastCourseID;
-if(courses.length != 0){
-    lastCourseID = courses[courses.length - 1].id
-}else{
-    lastCourseID = "C000";
+function GetLastCourseId(){
+    if(courses.length != 0){
+        lastCourseID = courses[courses.length - 1].id
+    }else{
+        lastCourseID = "C000";
+    }    
 }
 
 //Form Submit Function
