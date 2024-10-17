@@ -13,6 +13,7 @@ toggleClose.addEventListener("click" , function(){
 
 let students  = [];
 let courses = [];
+let courseEnrollData = [];
 
 
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
@@ -34,8 +35,20 @@ const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
             }).then((data) => {
                 courses = data;
             })
-        };
+};
 GetAllCourses()
+
+const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+                //Fetch CourseEnrollData Data from Database
+                async function GetAllCourseEnrollData(){
+                    fetch(GetAllCourseEnrollURL).then((response) => {
+                        return response.json();
+                    }).then((data) => {
+                        courseEnrollData = data;
+                    })
+};
+GetAllCourseEnrollData()
+
 
 
 document.addEventListener("DOMContentLoaded",()=>{
