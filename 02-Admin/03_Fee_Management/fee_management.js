@@ -71,6 +71,39 @@ document.getElementById('nic').addEventListener("keyup" , () =>{
 
 });
 
+function generateFullPymentID(lastID) {
+    let numericPart = parseInt(lastID.slice(1));
+    numericPart++;
+    let newID = "F" + numericPart.toString().padStart(3, "0");
+    return newID;
+}
+function generateInstallmentID(lastID) {
+    let numericPart = parseInt(lastID.slice(1));
+    numericPart++;
+    let newID = "I" + numericPart.toString().padStart(3, "0");
+    return newID;
+}
+
+let lastFullpaymentID;
+
+function GetLastFullpaymentId(){
+    if(FullpaymentDetails.length != 0){
+        lastFullpaymentID = FullpaymentDetails[FullpaymentDetails.length - 1].id
+    }else{
+        lastFullpaymentID = "F000";
+    }    
+}
+
+let lastInstallmentID;
+
+function GetLastInstallmentId(){
+    if(InstallmentDetails.length != 0){
+        lastInstallmentID = InstallmentDetails[InstallmentDetails.length - 1].id
+    }else{
+        lastInstallmentID = "I000";
+    }    
+}
+
     //Form Submit Function
     document.getElementById('fee-management-form').addEventListener('submit' ,(event) =>{
         event.preventDefault();
