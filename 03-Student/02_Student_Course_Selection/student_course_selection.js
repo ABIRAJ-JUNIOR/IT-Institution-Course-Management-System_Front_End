@@ -27,6 +27,19 @@ async function GetAllCourses(){
 };
 GetAllCourses()
 
+let courseEnrollData = [];
+const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+//Fetch CourseEnrollData Data from Database
+async function GetAllCourseEnrollData(){
+    fetch(GetAllCourseEnrollURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courseEnrollData = data;
+        GetLastCourseEnrollId();
+    })
+};
+GetAllCourseEnrollData()
+
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
 async function DuplicateCourseRemove(){
