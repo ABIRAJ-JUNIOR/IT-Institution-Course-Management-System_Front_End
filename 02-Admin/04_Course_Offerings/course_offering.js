@@ -41,6 +41,15 @@ async function UpdateCourseFee(CourseId , NewFee){
     CoursesTable();
 };
 
+const DeleteCourseURL = 'http://localhost:5251/api/Course/Delete-Course';
+// Delete Course From Database
+async function DeleteCourse(CourseId){
+    await fetch(`${DeleteCourseURL}/${CourseId}`, {
+        method: "DELETE"
+    });
+};
+
+
 //Site Navebar
 const toggle = document.querySelector(".fa-bars")
 const toggleClose = document.querySelector(".fa-xmark")
