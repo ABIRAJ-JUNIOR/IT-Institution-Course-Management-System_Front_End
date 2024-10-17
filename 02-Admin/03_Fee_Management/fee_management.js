@@ -144,6 +144,19 @@ async function UpdateInstallment(installmentId , paidAmount){
     GetAllInstallments();
 }
 
+const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+// Add Notifications
+async function AddNotification(NotificationData){
+    await fetch(AddNotificationURL,{
+        method:'Post',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(NotificationData)
+
+    })
+}
+
 let totalAmount = 0;
 let installmentAmount = 0;
 
