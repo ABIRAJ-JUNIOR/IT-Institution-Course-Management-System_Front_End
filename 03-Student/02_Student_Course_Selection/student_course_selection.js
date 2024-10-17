@@ -51,6 +51,18 @@ async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
     });
 };
 
+const AddCourseEnrollDataURL = 'http://localhost:5251/api/CourseEnroll/Add-Course-Enroll-Detail';
+//Add CourseEnrollData in Database
+async function AddCourseEnrollData(CourseEnrollData){
+    await fetch(AddCourseEnrollDataURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(CourseEnrollData)
+    });
+};
+
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
 async function DuplicateCourseRemove(){
