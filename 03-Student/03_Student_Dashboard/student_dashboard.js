@@ -129,6 +129,18 @@ async function UpdatePassword(StudentNic , NewPassword){
 }
 
 
+const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
+//Update CourseEnroll Status
+async function UpdateStatus(CourseEnrollId , Status){
+    await fetch(`${UpdateStatusURL}/${CourseEnrollId}/${Status}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
         document.getElementById("home-container").style.display = "none"
