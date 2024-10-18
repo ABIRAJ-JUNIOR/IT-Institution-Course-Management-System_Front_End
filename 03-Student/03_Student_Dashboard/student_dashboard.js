@@ -486,7 +486,73 @@ function ReminderNotification(){
     }
     
 }
-    
+  
+function RedDot(){
+    const notify = Notifications.filter(n => n.nic == nic && n.isDeleted != true);
+    if(notify.length != 0){
+        document.getElementById('circle').style.visibility = "visible"
+    }else{
+        document.getElementById('circle').style.visibility = "hidden"
+    }
+}
+
+function NotificationsTable(){
+    const student = students.find(s => s.nic == nic);
+    const notificationContainer = document.getElementById('notification-container');
+    notificationContainer.innerHTML = ""
+    Notifications.forEach(N => {
+        if(N.nic == nic && N.isDeleted != true){
+            if(N.type == "Course"){
+                const course = courses.find(c => c.id == N.sourceId)
+                const div = document.createElement('div');
+                div.className = "reminder";
+                div.innerHTML = `
+                    <p id="message">"Exciting news! We’re thrilled to announce the launch of our new course, <strong>${course.courseName}  ${course.level}</strong>, starting on <strong>${new Date(N.date).toDateString()}</strong></p>
+                    <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
+                `;
+                notificationContainer.appendChild(div);
+            }else if(N.type == "FullPayment"){
+                const fullpayment = FUllpaymentDetails.find(f => f.id == N.sourceId);
+                const courseEnroll = courseEnrollData.find(ce => ce.fullPaymentId == fullpayment.id)
+                const course = courses.find(c => c.id == courseEnroll.courseId)
+                const div = document.createElement('div');
+                div.className = "reminder";
+                div.innerHTML = `
+                    <p id="message">"Dear <strong>${student.fullName}</strong>, we are pleased to inform you that your full payment <strong>${fullpayment.fullPayment} Rs</strong> for <strong>${course.courseName} ${course.level} </strong>has been successfully received as of <strong>${new Date(N.date).toDateString()}</strong>. Thank you for your prompt payment!"</p>
+                    <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
+                `;
+                notificationContainer.appendChild(div);
+            }else if(N.type == "Installment"){
+                const installment = installments.find(i => i.id == N.sourceId)
+                const courseEnroll = courseEnrollData.find(ce => ce.installmentId == installment.id)
+                const course = courses.find(c => c.id == courseEnroll.courseId)
+                const div = document.createElement('div');
+                div.className = "reminder";
+                div.innerHTML = `
+                    <p id="message">We are pleased to inform you that your installment payment <strong>${installment.installmentAmount} Rs</strong> for <strong>${course.courseName}
+                    ${course.level}</strong> has been successfully received as of <strong>${new Date(N.date).toDateString()}</strong>. Thank you for your timely payment!</p>
+                    <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
+                `;
+                notificationContainer.appendChild(div);
+            }else if(N.type == "Reminder"){
+                const courseEnroll = courseEnrollData.find(ce => ce.id == student.courseEnrollId)
+                const course = courses.find(c => c.id == courseEnroll.courseId)
+
+                const today = new Date();
+                const endOfMonth = new Date(today.getFullYear(), today.getMonth() +1, 0);
+
+                const div = document.createElement('div');
+                div.className = "reminder";
+                div.innerHTML = `
+                    <p id="message">"Hello <strong>${student.fullName}</strong>, this is a friendly reminder that your next installment payment for <strong> ${course.courseName} ${course.level}</strong> is due on<strong> ${new Date(endOfMonth).toDateString()}</strong>. Please ensure that your payment is made on time to continue enjoying the course.</p>
+                    <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
+                `;
+                notificationContainer.appendChild(div);
+            }
+                
+        }
+    })
+}
     
     //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
     function UpdateCourseInActive(){
