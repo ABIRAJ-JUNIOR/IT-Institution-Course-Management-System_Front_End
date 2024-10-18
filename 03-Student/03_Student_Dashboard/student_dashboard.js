@@ -25,7 +25,7 @@ let FUllpaymentDetails  = [];
 let Notifications = [];
 
 
-const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -37,7 +37,7 @@ async function GetAllStudents(){
         UpdatePersonalInformation();
         PasswordChange();
 
-        const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+        const GetAllCoursesURL = 'http://localhost:7069/api/Course/Get-All-Courses';
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
@@ -45,7 +45,7 @@ async function GetAllStudents(){
             }).then((data) => {
                 courses = data;
 
-                const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+                const GetAllCourseEnrollURL = 'http://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -54,7 +54,7 @@ async function GetAllStudents(){
                         courseEnrollData = data;
                         HistoryCourseTable();
 
-                        const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+                        const GetAllInstallmentsURL = 'http://localhost:7069/api/Installment/Get-All-Installments';
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
@@ -62,7 +62,7 @@ async function GetAllStudents(){
                             }).then((data) => {
                                 installments = data;
 
-                                const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+                                const GetAllFullPaymentURL = 'http://localhost:7069/api/FullPayment/Get-All-FullPayments';
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
@@ -74,7 +74,7 @@ async function GetAllStudents(){
                                         UpdateCourseInActive();
                                         HistoryPaymentTable();
 
-                                        const GetAllNotificationsURL = "http://localhost:5251/api/Notification/Get-All-Notifications";
+                                        const GetAllNotificationsURL = "http://localhost:7069/api/Notification/Get-All-Notifications";
                                         // Fetch All Notification Data From Database
                                         async function GetAllNotifications(){
                                             fetch(GetAllNotificationsURL).then((response) => {
@@ -105,7 +105,7 @@ GetAllStudents();
 
 
 
-const UpdateStudentURL = 'http://localhost:5251/api/Student/Update-Student';
+const UpdateStudentURL = 'http://localhost:7069/api/Student/Update-Student';
 //Update Student Contact Details
 async function UpdateStudent(StudentNic , StudentUpdateData){
 
@@ -119,7 +119,7 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
 
 };
 
-const PasswordChangeURL = 'http://localhost:5251/api/Student/Password-Change';
+const PasswordChangeURL = 'http://localhost:7069/api/Student/Password-Change';
 //Update Student Password
 async function UpdatePassword(StudentNic , NewPassword){
     await fetch(`${PasswordChangeURL}/${StudentNic}`,{
@@ -131,7 +131,7 @@ async function UpdatePassword(StudentNic , NewPassword){
     });
 }
 
-const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
+const UpdateStatusURL = 'http://localhost:7069/api/CourseEnroll/Update-Status';
 //Update CourseEnroll Status
 async function UpdateStatus(CourseEnrollId , Status){
     await fetch(`${UpdateStatusURL}/${CourseEnrollId}/${Status}`,{
@@ -143,7 +143,7 @@ async function UpdateStatus(CourseEnrollId , Status){
 }
 
 
-const GetAllNotificationsURL = "http://localhost:5251/api/Notification/Get-All-Notifications";
+const GetAllNotificationsURL = "http://localhost:7069/api/Notification/Get-All-Notifications";
 // Fetch All Notification Data From Database
 async function GetAllNotifications(){
     fetch(GetAllNotificationsURL).then((response) => {
@@ -155,7 +155,7 @@ async function GetAllNotifications(){
 }
 GetAllNotifications();
 
-const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+const AddNotificationURL = 'http://localhost:7069/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
     await fetch(AddNotificationURL,{
@@ -169,7 +169,7 @@ async function AddNotification(NotificationData){
     GetAllNotifications();
 }
 
-const DeleteNotificationURL = 'http://localhost:5251/api/Notification/Delete-Notification';
+const DeleteNotificationURL = 'http://localhost:7069/api/Notification/Delete-Notification';
 async function DeleteNotification(Id){
     await fetch(`${DeleteNotificationURL}/${Id}`,{
         method:'DELETE'
@@ -188,7 +188,7 @@ async function GetAllStudentsDetails(){
 };
 GetAllStudentsDetails();
 
-const UpdateProfilePicURL = 'http://localhost:5251/api/Student/Update-Profile-Picture';
+const UpdateProfilePicURL = 'http://localhost:7069/api/Student/Update-Profile-Picture';
 async function UpdateProfilePic(formdata){
     await fetch(UpdateProfilePicURL, {
         method:'PUT',
@@ -230,7 +230,7 @@ document.getElementById('settings-button').addEventListener("click" , () =>{
 function ProfilePicLoading(){
     const student = students.find(s => s.nic == nic);
     const imagePath = student.imagePath
-    const imageFullPath = `http://localhost:5251${imagePath}`.trim();
+    const imageFullPath = `http://localhost:7069${imagePath}`.trim();
 
     const ProfilePicContainer = document.getElementById('profilepic-container');
     ProfilePicContainer.innerHTML = `

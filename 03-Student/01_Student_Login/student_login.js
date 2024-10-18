@@ -1,5 +1,5 @@
 let students  = [];
-const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
@@ -11,7 +11,7 @@ async function GetAllStudents(){
 GetAllStudents()
 
 let courseEnrollData = [];
-const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+const GetAllCourseEnrollURL = 'http://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
 async function GetAllCourseEnrollData(){
     //Fetch Students Data from Database
     fetch(GetAllCourseEnrollURL).then((response) => {

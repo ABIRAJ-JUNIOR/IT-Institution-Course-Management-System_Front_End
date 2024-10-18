@@ -1,4 +1,4 @@
-const ContactUsURL = 'http://localhost:5251/api/ContactUs/Add-ContactUs-Details';
+const ContactUsURL = 'http://localhost:7069/api/ContactUs/Add-ContactUs-Details';
 
 async function AddContactUs(ContactUsDetails){
     await fetch((ContactUsURL),{

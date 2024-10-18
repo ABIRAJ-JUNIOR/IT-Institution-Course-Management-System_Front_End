@@ -19,7 +19,7 @@ let courseEnrollData = [];
 let InstallmentDetails  = [];
 let FullpaymentDetails  = [];
 
-const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -31,7 +31,7 @@ async function GetAllStudents(){
 GetAllStudents();;
 
 
-const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+const GetAllCoursesURL = 'http://localhost:7069/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
@@ -42,7 +42,7 @@ async function GetAllCourses(){
 };
 GetAllCourses();
 
-const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+const GetAllCourseEnrollURL = 'http://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
 //Fetch CourseEnrollData Data from Database
 async function GetAllCourseEnrollData(){
     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -53,7 +53,7 @@ async function GetAllCourseEnrollData(){
 };
 GetAllCourseEnrollData();
 
-const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+const GetAllInstallmentsURL = 'http://localhost:7069/api/Installment/Get-All-Installments';
 //Fetch Installments Data from Database
 async function GetAllInstallments(){
     fetch(GetAllInstallmentsURL).then((response) => {
@@ -67,7 +67,7 @@ async function GetAllInstallments(){
 };
 GetAllInstallments();
 
-const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+const GetAllFullPaymentURL = 'http://localhost:7069/api/FullPayment/Get-All-FullPayments';
 //Fetch Fullpayments Data from Database
 async function GetAllFullPayments(){
     fetch(GetAllFullPaymentURL).then((response) => {
@@ -80,7 +80,7 @@ async function GetAllFullPayments(){
 };
 GetAllFullPayments();
 
-const AddFullPaymentURL = 'http://localhost:5251/api/FullPayment/Add-FullPayment';
+const AddFullPaymentURL = 'http://localhost:7069/api/FullPayment/Add-FullPayment';
 //Add FullPayment data in Database
 async function AddFullPayment(FullPaymentData){
     await fetch(AddFullPaymentURL, {
@@ -95,7 +95,7 @@ async function AddFullPayment(FullPaymentData){
 };
 
 
-const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
+const UpdateStatusURL = 'http://localhost:7069/api/CourseEnroll/Update-Status';
 //Update CourseEnroll Status
 async function UpdateStatus(CourseEnrollId , Status){
     await fetch(`${UpdateStatusURL}/${CourseEnrollId}/${Status}`,{
@@ -107,7 +107,7 @@ async function UpdateStatus(CourseEnrollId , Status){
     GetAllCourseEnrollData();
 }
 
-const UpdatePaymentIdURL = 'http://localhost:5251/api/CourseEnroll/Add-payment-Id';
+const UpdatePaymentIdURL = 'http://localhost:7069/api/CourseEnroll/Add-payment-Id';
 //Update CourseEnroll PaymentId
 async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
     await fetch(`${UpdatePaymentIdURL}/${CourseEnrollId}/${InstallmentId}/${FullPaymentId}`,{
@@ -119,7 +119,7 @@ async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
     GetAllCourseEnrollData();
 }
 
-const UpdateInstallmentURL = 'http://localhost:5251/api/Installment/Update-Installment';
+const UpdateInstallmentURL = 'http://localhost:7069/api/Installment/Update-Installment';
 //Update Installments
 async function UpdateInstallment(installmentId , paidAmount){
     await fetch(`${UpdateInstallmentURL}/${installmentId}/${paidAmount}`,{
@@ -131,7 +131,7 @@ async function UpdateInstallment(installmentId , paidAmount){
     GetAllInstallments();
 }
 
-const AddInstallmentURL = 'http://localhost:5251/api/Installment/Add-installment';
+const AddInstallmentURL = 'http://localhost:7069/api/Installment/Add-installment';
 //Add Stud
 async function AddInstallment(InstallmentData){
     await fetch(AddInstallmentURL, {
@@ -145,7 +145,7 @@ async function AddInstallment(InstallmentData){
     displayInstallmentPaymentTable();
 };
 
-const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+const AddNotificationURL = 'http://localhost:7069/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
     await fetch(AddNotificationURL,{

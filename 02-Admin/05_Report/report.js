@@ -19,7 +19,7 @@ let FullpaymentDetails  = [];
 
 
 
-const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -27,7 +27,7 @@ async function GetAllStudents(){
     }).then((data) => {
         students = data;
 
-        const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+        const GetAllCoursesURL = 'http://localhost:7069/api/Course/Get-All-Courses';
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
@@ -35,7 +35,7 @@ async function GetAllStudents(){
             }).then((data) => {
                 courses = data;
 
-                const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+                const GetAllCourseEnrollURL = 'http://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -43,7 +43,7 @@ async function GetAllStudents(){
                     }).then((data) => {
                         courseEnrollData = data;
 
-                        const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+                        const GetAllInstallmentsURL = 'http://localhost:7069/api/Installment/Get-All-Installments';
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
@@ -51,7 +51,7 @@ async function GetAllStudents(){
                             }).then((data) => {
                                 InstallmentsDetails = data;
 
-                                const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+                                const GetAllFullPaymentURL = 'http://localhost:7069/api/FullPayment/Get-All-FullPayments';
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
