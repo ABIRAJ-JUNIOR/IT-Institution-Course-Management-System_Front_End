@@ -1,7 +1,7 @@
 const nic = JSON.parse(sessionStorage.getItem('NIC'));
 
 let students  = [];
-const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -15,7 +15,7 @@ GetAllStudents()
 
 
 let courses = [];
-const GetAllCoursesURL = 'http://localhost:7069/api/Course/Get-All-Courses';
+const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
@@ -30,7 +30,7 @@ GetAllCourses()
 
 
 let courseEnrollData = [];
-const GetAllCourseEnrollURL = 'http://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
+const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
 //Fetch CourseEnrollData Data from Database
 async function GetAllCourseEnrollData(){
     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -44,7 +44,7 @@ GetAllCourseEnrollData()
 
 
 // Update CourseEnrollId in Student Table in Database
-const UpdateCourseEnrollIdURL = 'http://localhost:7069/api/Student/Update-CourseEnroll-Id';
+const UpdateCourseEnrollIdURL = 'https://localhost:7069/api/Student/Update-CourseEnroll-Id';
 async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
     await fetch(`${UpdateCourseEnrollIdURL}/${StudentNic}/${CourseEnrollId}`, {
         method: "PUT",
@@ -55,7 +55,7 @@ async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
 };
 
 
-const AddCourseEnrollDataURL = 'http://localhost:7069/api/CourseEnroll/Add-Course-Enroll-Detail';
+const AddCourseEnrollDataURL = 'https://localhost:7069/api/CourseEnroll/Add-Course-Enroll-Detail';
 //Add CourseEnrollData in Database
 async function AddCourseEnrollData(CourseEnrollData){
     await fetch(AddCourseEnrollDataURL, {

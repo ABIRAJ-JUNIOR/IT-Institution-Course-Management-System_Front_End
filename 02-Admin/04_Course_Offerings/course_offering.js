@@ -1,10 +1,10 @@
 //Courses retrive from Local storage
 let courses = [];
 
-const GetAllCoursesURL = 'http://localhost:7069/api/Course/Get-All-Courses';
-const AddCourseURL = 'http://localhost:7069/api/Course/Add-Course';
-const UpdateCourseURL = 'http://localhost:7069/api/Course/Update-Course';
-const DeleteCourseURL = 'http://localhost:7069/api/Course/Delete-Course';
+const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
+const AddCourseURL = 'https://localhost:7069/api/Course/Add-Course';
+const UpdateCourseURL = 'https://localhost:7069/api/Course/Update-Course';
+const DeleteCourseURL = 'https://localhost:7069/api/Course/Delete-Course';
 
 
 //Fetch Students Data from Database
@@ -52,7 +52,7 @@ async function DeleteCourse(CourseId){
 };
 
 let students = [];
-const GetAllStudentsURL = 'http://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
@@ -64,7 +64,7 @@ async function GetAllStudents(){
 GetAllStudents()
 
 
-const AddNotificationURL = 'http://localhost:7069/api/Notification/Add-Notification';
+const AddNotificationURL = 'https://localhost:7069/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
     await fetch(AddNotificationURL,{
