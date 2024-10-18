@@ -564,7 +564,7 @@ function removeCourseNotification(event,notificationId){
 }
 
     
-    //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
+//Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
 function UpdateCourseInActive(){
     const student = students.find(s => s.nic == nic);
 
@@ -638,8 +638,27 @@ function UpdateCourseInActive(){
     
 }
 
+function HistoryCourseTable(){
 
-
+    const tableBody = document.getElementById('course-body');
+    tableBody.innerHTML = ""
+    courseEnrollData.forEach(ced => {
+        if(ced.nic == nic){
+            const course = courses.find(c => c.id == ced.courseId);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${course.courseName}</td>
+                <td>${course.level}</td>
+                <td>${ced.duration} Months</td>
+                <td>${new Date(ced.courseEnrollDate).toDateString()}</td>
+                <td>${ced.status}</td>
+            `
+            tableBody.appendChild(tr);
+        }
+        
+    })
+    
+}
 
 
 
