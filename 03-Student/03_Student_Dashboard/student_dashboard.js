@@ -195,15 +195,32 @@ async function UpdateProfilePic(formdata){
 }
 
 
-document.addEventListener("DOMContentLoaded" , ()=>{
-    document.getElementById('profile-button').addEventListener("click" , () =>{
-        document.getElementById("home-container").style.display = "none"
-        document.getElementById("profile-container").style.display = "block"
-    })
-    document.getElementById('home-button').addEventListener("click" , () =>{
-        document.getElementById("home-container").style.display = "block"
-        document.getElementById("profile-container").style.display = "none"
-    })
+
+document.getElementById('profile-button').addEventListener("click" , () =>{
+    document.getElementById("home-container").style.display = "none"
+    document.getElementById("history-container").style.display = "none"
+    document.getElementById("password-container").style.display = "none"
+    document.getElementById("profile-container").style.display = "block"
+
+})
+document.getElementById('home-button').addEventListener("click" , () =>{
+    document.getElementById("profile-container").style.display = "none"
+    document.getElementById("history-container").style.display = "none"
+    document.getElementById("password-container").style.display = "none"
+    document.getElementById("home-container").style.display = "block"
+})
+document.getElementById('history-button').addEventListener("click" , () =>{
+    document.getElementById("home-container").style.display = "none"
+    document.getElementById("profile-container").style.display = "none"
+    document.getElementById("password-container").style.display = "none"
+    document.getElementById("history-container").style.display = "block"
+})
+document.getElementById('settings-button').addEventListener("click" , () =>{
+    document.getElementById("home-container").style.display = "none"
+    document.getElementById("profile-container").style.display = "none"
+    document.getElementById("history-container").style.display = "none"
+    document.getElementById("password-container").style.display = "block"
+})
     
     // Home Page
     function PageLoadingDetails(){
@@ -514,7 +531,6 @@ document.addEventListener("DOMContentLoaded" , ()=>{
     }
     
     UpdateCourseInActive();
-});
 
 
 
