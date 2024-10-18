@@ -660,7 +660,39 @@ function HistoryCourseTable(){
     
 }
 
-
+function HistoryPaymentTable(){
+    const tableBody = document.getElementById('payment-body');
+    if(tableBody)
+    tableBody.innerHTML = ""
+    courseEnrollData.forEach(ced => {
+        if(ced.nic == nic){
+            if(ced.installmentId != null && ced.fullPaymentId == null){
+                const installment = installments.find(i => i.id == ced.installmentId);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${installment.id}</td>
+                    <td>Installment</td>
+                    <td>${installment.totalAmount}</td>
+                    <td>${new Date(installment.paymentDate).toDateString()}</td>
+                    <td>${installment.paymentDue <= 0 ? "Paid" : "Active"}</td>
+                `
+                tableBody.appendChild(tr);
+            }else if(ced.installmentId == null && ced.fullPaymentId != null){
+                const fullpayment = FUllpaymentDetails.find(f => f.id == ced.fullPaymentId);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${fullpayment.id}</td>
+                    <td>Full Payment</td>
+                    <td>${fullpayment.fullPayment}</td>
+                    <td>${new Date(fullpayment.paymentDate).toDateString()}</td>
+                    <td>Paid</td>
+                `
+                tableBody.appendChild(tr);
+            }
+        }
+        
+    })
+}
 
 
 
