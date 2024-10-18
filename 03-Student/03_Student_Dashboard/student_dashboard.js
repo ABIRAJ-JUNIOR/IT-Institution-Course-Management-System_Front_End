@@ -174,6 +174,27 @@ async function DeleteNotification(Id){
     GetAllNotifications();
 }
 
+//Fetch Students Data from Database
+async function GetAllStudentsDetails(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+        ProfilePicLoading();
+    })
+};
+GetAllStudentsDetails();
+
+const UpdateProfilePicURL = 'http://localhost:5251/api/Student/Update-Profile-Picture';
+async function UpdateProfilePic(formdata){
+    await fetch(UpdateProfilePicURL, {
+        method:'PUT',
+        body:formdata
+    })
+    GetAllStudentsDetails();
+}
+
+
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
         document.getElementById("home-container").style.display = "none"
