@@ -13,6 +13,7 @@ async function GetAllStudents(){
 };
 GetAllStudents()
 
+
 let courses = [];
 const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
@@ -27,6 +28,7 @@ async function GetAllCourses(){
 };
 GetAllCourses()
 
+
 let courseEnrollData = [];
 const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
 //Fetch CourseEnrollData Data from Database
@@ -40,6 +42,7 @@ async function GetAllCourseEnrollData(){
 };
 GetAllCourseEnrollData()
 
+
 // Update CourseEnrollId in Student Table in Database
 const UpdateCourseEnrollIdURL = 'http://localhost:5251/api/Student/Update-CourseEnroll-Id';
 async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
@@ -50,6 +53,7 @@ async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
         },
     });
 };
+
 
 const AddCourseEnrollDataURL = 'http://localhost:5251/api/CourseEnroll/Add-Course-Enroll-Detail';
 //Add CourseEnrollData in Database
@@ -62,6 +66,9 @@ async function AddCourseEnrollData(CourseEnrollData){
         body: JSON.stringify(CourseEnrollData)
     });
 };
+
+
+
 
 // Remove Duplicates courses from Local Storage
 let uniqueCourses = [];
@@ -76,7 +83,6 @@ async function DuplicateCourseRemove(){
     }
     CourseDropDown(uniqueCourses);
 }
-DuplicateCourseRemove();
 
 function CourseDropDown(){
     uniqueCourses.forEach(C => {
@@ -121,7 +127,7 @@ function GetLastCourseEnrollId(){
     }    
 }
 
-///submit form
+//submit form
 document.getElementById("course-form").addEventListener('submit',(event)=>{
     event.preventDefault()
 

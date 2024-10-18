@@ -28,7 +28,7 @@ async function GetAllStudents(){
         students = data;
     })
 };
-GetAllStudents();
+GetAllStudents();;
 
 
 const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
