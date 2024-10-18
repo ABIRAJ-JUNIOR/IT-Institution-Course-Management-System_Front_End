@@ -441,47 +441,51 @@ function PasswordChange(){
 
     
     
-    //Notification
-    function Notification(){
-        document.getElementById('notification').addEventListener('click' , ()=>{
-            document.getElementById('overlay').style.display = 'block'
-            document.getElementById('popupbox').style.display = 'block'
-        })
-        
-        document.getElementById('overlay').addEventListener('click' , ()=>{
-            document.getElementById('overlay').style.display = 'none'
-            document.getElementById('popupbox').style.display = 'none'
-        })
-        
-        document.getElementById('remove-notification').addEventListener('click' , (event)=>{
-           event.target.parentElement.remove()
-           document.getElementById('circle').style.visibility = "hidden"
-        })
+//Notification
+
+document.getElementById('notification').addEventListener('click' , ()=>{
+    document.getElementById('overlay').style.display = 'block'
+    document.getElementById('popupbox').style.display = 'block'
+})
+
+document.getElementById('overlay').addEventListener('click' , ()=>{
+    document.getElementById('overlay').style.display = 'none'
+    document.getElementById('popupbox').style.display = 'none'
+})
         
         
-        const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId)
+function ReminderNotification(){
+    const student = students.find(s => s.nic == nic);
+    const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId)
+    const InstallmentDetails = installments.find(i => i.id == CourseEnroll.installmentId);
+    const notify = Notifications.find(n => n.nic == nic && n.type == "Reminder" && new Date(n.date).getMonth() == new Date().getMonth());
+
+    if(InstallmentDetails){
+        const notification = Notifications.find(n => n.sourceId == InstallmentDetails.id)
+        if(InstallmentDetails.paymentDue != 0){
+            if(new Date().getMonth() != new Date(notification.date).getMonth()){
+                const today = new Date();
+                const endOfMonth = new Date(today.getFullYear(), today.getMonth() +1, 0);
     
-        if(CourseEnroll.installmentId != 0){
-            const installment = installments.find(i => i.id == CourseEnroll.installmentId);
-            const today = new Date();
-            const endOfMonth = new Date(today.getFullYear(), today.getMonth() +1, 0);
-            // console.log(endOfMonth.getDate() - today.getDate())
-    
-            if(endOfMonth.getDate() - today.getDate() <= 5){
-                    document.getElementById('reminder').style.display = "flex"
-                    document.getElementById('message').innerText = `You have to pay your installment of ${installment.installmentAmount}/= this month.`
-                    document.getElementById('circle').style.visibility = "visible"
-            }else{
-                document.getElementById('reminder').style.display = "none"
-                document.getElementById('circle').style.visibility = "hidden"
-    
+                if(endOfMonth.getDate() - today.getDate() == 5){
+                    if(!notify){
+                        const NotificationData ={
+                            nic,
+                            type:"Reminder",
+                            sourceId:"0000",
+                            date:new Date()
+                        }
+                        AddNotification(NotificationData);
+                    }
+
+                }
             }
-        }else{
-            document.getElementById('reminder').style.display = "none"
-            document.getElementById('circle').style.visibility = "hidden"
+            
         }
+       
     }
-    Notification();
+    
+}
     
     
     //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
