@@ -553,6 +553,16 @@ function NotificationsTable(){
         }
     })
 }
+
+// Soft Delete Function
+function removeCourseNotification(event,notificationId){
+    event.target.parentElement.remove();
+    const notification = Notifications.find(n => n.id == notificationId);
+    if(notification){
+        DeleteNotification(notificationId);
+    }
+}
+
     
     //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
     function UpdateCourseInActive(){
