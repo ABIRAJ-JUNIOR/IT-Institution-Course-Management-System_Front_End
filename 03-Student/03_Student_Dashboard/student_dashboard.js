@@ -102,6 +102,19 @@ async function GetAllStudents(){
 };
 GetAllStudents();
 
+const UpdateStudentURL = 'http://localhost:5251/api/Student/Update-Student';
+//Update Student Contact Details
+async function UpdateStudent(StudentNic , StudentUpdateData){
+
+    await fetch(`${UpdateStudentURL}/${StudentNic}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(StudentUpdateData)
+    });
+
+};
 
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
