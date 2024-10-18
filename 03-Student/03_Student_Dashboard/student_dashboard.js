@@ -234,61 +234,60 @@ function ProfilePicLoading(){
     
 }
     
-    // Home Page
-    function PageLoadingDetails(){
-    
-        const student = students.find(s => s.nic == nic);
-        const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId)
-        const coursedetails = courses.find(c => c.id == CourseEnroll.courseId)
+// Home Page
+function PageLoadingDetails(){
 
-        let installment ;
-        if(CourseEnroll.installmentId != 0 ){
-            installment = installments.find(i => i.id == CourseEnroll.installmentId);
+    const student = students.find(s => s.nic == nic);
+    const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId)
+    const coursedetails = courses.find(c => c.id == CourseEnroll.courseId)
+    
+    let installment ;
+    if(CourseEnroll.installmentId != null ){
+        installment = installments.find(i => i.id == CourseEnroll.installmentId);
+    }
+    
+    let fullPayment ;
+    if(CourseEnroll.fullPaymentId != null){
+        fullPayment = FUllpaymentDetails.find(f => f.id == CourseEnroll.fullPaymentId)
+    }
+    
+
+    if(student){
+        document.getElementById("courseName").textContent = coursedetails.courseName
+        document.getElementById("greeting").textContent = student.fullName
+        document.getElementById("proficiencyLevels").textContent = coursedetails.level
+        
+
+        if(fullPayment || installment){
+            document.getElementById("status").textContent = `Active`
+            document.getElementById("status").style.color = "Green"
+        }else{
+            document.getElementById("status").textContent = `Inactive`
+            document.getElementById("status").style.color = "Red"
         }
 
-        let fullPayment ;
-        if(CourseEnroll.fullPaymentId != 0){
-            fullPayment = FUllpaymentDetails.find(f => f.id == CourseEnroll.fullPaymentId)
-        }
-    
 
-        if(student){
-            document.getElementById("courseName").textContent = coursedetails.courseName
-            document.getElementById("greeting").textContent = student.fullName
-            document.getElementById("proficiencyLevels").textContent = coursedetails.level
-            
-    
-            if(fullPayment || installment){
-                document.getElementById("status").textContent = `Active`
-                document.getElementById("status").style.color = "Green"
-            }else{
-                document.getElementById("status").textContent = `Inactive`
-                document.getElementById("status").style.color = "Red"
-            }
-    
-    
-            if(fullPayment){
-                document.getElementById("p1").textContent = `Course Fee   : ${fullPayment.fullPayment}`
-                document.getElementById("p2").textContent = `Payment Plan : Full Payment`
-                document.getElementById("p3").textContent = `Full Payment Done`
-                document.getElementById("p4").textContent = `Payment Date : ${new Date(fullPayment.paymentDate).toDateString()}`
-            }else if(installment){
-                document.getElementById("p1").textContent = `Course Fee   : ${installment.totalAmount}`
-                document.getElementById("p2").textContent = `Payment Plan : Installment`
-                document.getElementById("p3").textContent = `Payment Paid : ${installment.paymentPaid}`
-                document.getElementById("p4").textContent = `Payment Due : ${installment.paymentDue}`
-                document.getElementById("p5").textContent = `Payment Date : ${new Date(installment.paymentDate).toDateString()}`
-            }else{
-                document.getElementById("p1").textContent = `Payment Pending .....`
-            }
+        if(fullPayment){
+            document.getElementById("p1").textContent = `Course Fee   : ${fullPayment.fullPayment}`
+            document.getElementById("p2").textContent = `Payment Plan : Full Payment`
+            document.getElementById("p3").textContent = `Full Payment Done`
+            document.getElementById("p4").textContent = `Payment Date : ${new Date(fullPayment.paymentDate).toDateString()}`
+        }else if(installment){
+            document.getElementById("p1").textContent = `Course Fee   : ${installment.totalAmount}`
+            document.getElementById("p2").textContent = `Payment Plan : Installment`
+            document.getElementById("p3").textContent = `Payment Paid : ${installment.paymentPaid}`
+            document.getElementById("p4").textContent = `Payment Due : ${installment.paymentDue}`
+            document.getElementById("p5").textContent = `Payment Date : ${new Date(installment.paymentDate).toDateString()}`
+        }else{
+            document.getElementById("p1").textContent = `Payment Pending .....`
         }
     }
-    PageLoadingDetails();
+}
     
     // Profile page
-    // Personal Information Update and View
+// Personal Information Update and View
+function UpdatePersonalInformation(){
     const student = students.find(s => s.nic == nic);
-    
     if(student){
         document.getElementById("nic").value = student.nic
         document.getElementById("fullname").value = student.fullName
@@ -316,11 +315,13 @@ function ProfilePicLoading(){
         const Email = document.getElementById("email").value.trim();
         const Phone = document.getElementById("phone").value.trim();
     
-        student.fullName = FullName;
-        student.email = Email;
-        student.phone = Phone;
-
-        localStorage.setItem('Students' , JSON.stringify(students));
+        const StudentUpdateData = {
+            fullName:FullName,
+            email:Email,
+            phone:Phone
+        }
+    
+        UpdateStudent(student.nic , StudentUpdateData)
     
         document.getElementById("fullname").style.border = "none"
         document.getElementById("email").style.border = "none"
@@ -351,48 +352,50 @@ function ProfilePicLoading(){
         document.getElementById('Cancel-button').style.display = 'none'
     })
     
+}
+    
     
     // Password Change
-    
-    function Encryption(password){
-        return btoa(password)
+
+function Encryption(password){
+    return btoa(password)
+}
+
+function validatePassword(password) {
+    // Define the rules
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    // Check password length
+    if (password.length < minLength) {
+        return "Password must be at least 8 characters long.";
     }
 
-    function validatePassword(password) {
-        // Define the rules
-        const minLength = 8;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasNumbers = /[0-9]/.test(password);
-        const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    
-        // Check password length
-        if (password.length < minLength) {
-            return "Password must be at least 8 characters long.";
-        }
-    
-        // Check for uppercase letters
-        if (!hasUpperCase) {
-            return "Password must contain at least one uppercase letter.";
-        }
-    
-        // Check for lowercase letters
-        if (!hasLowerCase) {
-            return "Password must contain at least one lowercase letter.";
-        }
-    
-        // Check for numbers
-        if (!hasNumbers) {
-            return "Password must contain at least one number.";
-        }
-    
-        // Check for special characters
-        if (!hasSpecialChars) {
-            return "Password must contain at least one special character.";
-        }
-    
-        return "Password is valid!";
+    // Check for uppercase letters
+    if (!hasUpperCase) {
+        return "Password must contain at least one uppercase letter.";
     }
+
+    // Check for lowercase letters
+    if (!hasLowerCase) {
+        return "Password must contain at least one lowercase letter.";
+    }
+
+    // Check for numbers
+    if (!hasNumbers) {
+        return "Password must contain at least one number.";
+    }
+
+    // Check for special characters
+    if (!hasSpecialChars) {
+        return "Password must contain at least one special character.";
+    }
+
+    return "Password is valid!";
+}
     
 
     document.getElementById('update-password').addEventListener('click' , ()=>{
