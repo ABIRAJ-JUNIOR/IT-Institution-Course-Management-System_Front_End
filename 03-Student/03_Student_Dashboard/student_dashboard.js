@@ -166,6 +166,14 @@ async function AddNotification(NotificationData){
     GetAllNotifications();
 }
 
+const DeleteNotificationURL = 'http://localhost:5251/api/Notification/Delete-Notification';
+async function DeleteNotification(Id){
+    await fetch(`${DeleteNotificationURL}/${Id}`,{
+        method:'DELETE'
+    });
+    GetAllNotifications();
+}
+
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
         document.getElementById("home-container").style.display = "none"
