@@ -221,6 +221,18 @@ document.getElementById('settings-button').addEventListener("click" , () =>{
     document.getElementById("history-container").style.display = "none"
     document.getElementById("password-container").style.display = "block"
 })
+
+function ProfilePicLoading(){
+    const student = students.find(s => s.nic == nic);
+    const imagePath = student.imagePath
+    const imageFullPath = `http://localhost:5251${imagePath}`.trim();
+
+    const ProfilePicContainer = document.getElementById('profilepic-container');
+    ProfilePicContainer.innerHTML = `
+        <img src="${imageFullPath}" alt="${student.fullName}"  id="profile-picture" class="profile-picture">
+    `;
+    
+}
     
     // Home Page
     function PageLoadingDetails(){
