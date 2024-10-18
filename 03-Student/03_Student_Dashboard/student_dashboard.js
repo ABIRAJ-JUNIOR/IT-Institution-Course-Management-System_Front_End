@@ -116,6 +116,19 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
 
 };
 
+const PasswordChangeURL = 'http://localhost:5251/api/Student/Password-Change';
+//Update Student Password
+async function UpdatePassword(StudentNic , NewPassword){
+    await fetch(`${PasswordChangeURL}/${StudentNic}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(NewPassword)
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
         document.getElementById("home-container").style.display = "none"
