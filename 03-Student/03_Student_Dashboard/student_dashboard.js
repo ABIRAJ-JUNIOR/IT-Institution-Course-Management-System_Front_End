@@ -24,6 +24,7 @@ let installments  = [];
 let FUllpaymentDetails  = [];
 let Notifications = [];
 
+
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
@@ -102,6 +103,8 @@ async function GetAllStudents(){
 };
 GetAllStudents();
 
+
+
 const UpdateStudentURL = 'http://localhost:5251/api/Student/Update-Student';
 //Update Student Contact Details
 async function UpdateStudent(StudentNic , StudentUpdateData){
@@ -128,7 +131,6 @@ async function UpdatePassword(StudentNic , NewPassword){
     });
 }
 
-
 const UpdateStatusURL = 'http://localhost:5251/api/CourseEnroll/Update-Status';
 //Update CourseEnroll Status
 async function UpdateStatus(CourseEnrollId , Status){
@@ -139,6 +141,7 @@ async function UpdateStatus(CourseEnrollId , Status){
         },
     });
 }
+
 
 const GetAllNotificationsURL = "http://localhost:5251/api/Notification/Get-All-Notifications";
 // Fetch All Notification Data From Database
@@ -196,6 +199,8 @@ async function UpdateProfilePic(formdata){
 
 
 
+
+
 document.getElementById('profile-button').addEventListener("click" , () =>{
     document.getElementById("home-container").style.display = "none"
     document.getElementById("history-container").style.display = "none"
@@ -233,7 +238,8 @@ function ProfilePicLoading(){
     `;
     
 }
-    
+
+
 // Home Page
 function PageLoadingDetails(){
 
@@ -283,8 +289,9 @@ function PageLoadingDetails(){
         }
     }
 }
-    
-    // Profile page
+
+
+// Profile page
 // Personal Information Update and View
 function UpdatePersonalInformation(){
     const student = students.find(s => s.nic == nic);
@@ -353,9 +360,9 @@ function UpdatePersonalInformation(){
     })
     
 }
-    
-    
-    // Password Change
+
+
+// Password Change
 
 function Encryption(password){
     return btoa(password)
@@ -396,7 +403,6 @@ function validatePassword(password) {
 
     return "Password is valid!";
 }
-    
 
 function PasswordChange(){
     const student = students.find(s => s.nic == nic);
@@ -438,9 +444,9 @@ function PasswordChange(){
         document.getElementById('confirmPassword').value = ""
     })
 }
+ 
 
-    
-    
+
 //Notification
 
 document.getElementById('notification').addEventListener('click' , ()=>{
@@ -452,8 +458,8 @@ document.getElementById('overlay').addEventListener('click' , ()=>{
     document.getElementById('overlay').style.display = 'none'
     document.getElementById('popupbox').style.display = 'none'
 })
-        
-        
+
+
 function ReminderNotification(){
     const student = students.find(s => s.nic == nic);
     const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId)
@@ -486,7 +492,8 @@ function ReminderNotification(){
     }
     
 }
-  
+
+
 function RedDot(){
     const notify = Notifications.filter(n => n.nic == nic && n.isDeleted != true);
     if(notify.length != 0){
@@ -563,7 +570,6 @@ function removeCourseNotification(event,notificationId){
     }
 }
 
-    
 //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
 function UpdateCourseInActive(){
     const student = students.find(s => s.nic == nic);
@@ -638,6 +644,7 @@ function UpdateCourseInActive(){
     
 }
 
+
 function HistoryCourseTable(){
 
     const tableBody = document.getElementById('course-body');
@@ -659,7 +666,7 @@ function HistoryCourseTable(){
     })
     
 }
-
+    
 function HistoryPaymentTable(){
     const tableBody = document.getElementById('payment-body');
     if(tableBody)
@@ -694,11 +701,24 @@ function HistoryPaymentTable(){
     })
 }
 
+document.getElementById("profile-pic-update-form").addEventListener("submit",(event)=>{
+    event.preventDefault();
+    const fileInput = document.getElementById('profilepic').files;
 
+    const formData = new FormData();
+    formData.append('nic',nic);
+    formData.append("imageFile", fileInput[0]);
 
+    UpdateProfilePic(formData);
+    event.target.reset();
+});
 
+function ProfilePicDelete(){
+    if(confirm("Do you want to delete your Profile Picture?")){
+        const formData = new FormData();
+    formData.append('nic',nic);
+    formData.append("imageFile", "");
 
-
-
-
-
+    UpdateProfilePic(formData);
+    }
+}
