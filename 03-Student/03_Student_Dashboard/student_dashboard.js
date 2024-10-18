@@ -398,6 +398,9 @@ function validatePassword(password) {
 }
     
 
+function PasswordChange(){
+    const student = students.find(s => s.nic == nic);
+
     document.getElementById('update-password').addEventListener('click' , ()=>{
         const oldPassword = Encryption(document.getElementById('oldPassword').value.trim());
         const newPassword = Encryption(document.getElementById('newPassword').value.trim());
@@ -414,13 +417,17 @@ function validatePassword(password) {
         if(student){
             if(student.password == oldPassword){
                 if(newPassword == confirmPassword){
-                    student.password = newPassword;
-                    localStorage.setItem('Students' , JSON.stringify(students));
-                    alert('Password Changed Successfully');
+
+                    const NewPassword = {
+                        newPassword
+                    }
+
+                    UpdatePassword(student.nic , NewPassword)
+
+                    alert('Password Changed Successfully')
                 }else{
                     alert('Password does not match')
                 }
-            
             }else{
                 alert("Old Password is incorrect")
             }
@@ -430,6 +437,7 @@ function validatePassword(password) {
         document.getElementById('newPassword').value = ""
         document.getElementById('confirmPassword').value = ""
     })
+}
 
     
     
