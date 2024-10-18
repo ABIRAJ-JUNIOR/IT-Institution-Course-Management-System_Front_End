@@ -140,6 +140,31 @@ async function UpdateStatus(CourseEnrollId , Status){
     });
 }
 
+const GetAllNotificationsURL = "http://localhost:5251/api/Notification/Get-All-Notifications";
+// Fetch All Notification Data From Database
+async function GetAllNotifications(){
+    fetch(GetAllNotificationsURL).then((response) => {
+        return response.json();
+    }).then((data)=> {
+        Notifications = data
+        RedDot();
+    })
+}
+GetAllNotifications();
+
+const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+// Add Notifications
+async function AddNotification(NotificationData){
+    await fetch(AddNotificationURL,{
+        method:'Post',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(NotificationData)
+
+    })
+    GetAllNotifications();
+}
 
 document.addEventListener("DOMContentLoaded" , ()=>{
     document.getElementById('profile-button').addEventListener("click" , () =>{
