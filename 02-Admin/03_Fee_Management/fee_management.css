@@ -51,6 +51,7 @@ nav{
 .fa-bars:active{
     scale: 0.9;
 }
+
 /* Side Navebar */
 
 .side-navebar{
@@ -130,7 +131,7 @@ section {
 #main-container  h2{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2rem;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     color: #007bff;
     letter-spacing: 2px;
 
@@ -138,10 +139,10 @@ section {
 #fee-management{
   margin: auto;  
   background-color: rgb(211, 220, 238);
-  padding: 30px 50px 50px 50px;
+  padding: 30px;
   border-radius: 20px;
   width: 750px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
 label {
@@ -162,7 +163,7 @@ input , select{
     outline: none;
     border-radius: 5px;
     margin-left: 25px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 input:focus,select:focus{
     border: 1.9px solid #007bff;
@@ -276,6 +277,7 @@ td > p{
 }
 #table-container{
     overflow: auto;
+    scrollbar-width: none;
     height: 85%;
 }
 #table-container > table{
@@ -288,7 +290,7 @@ td > p{
 }
 th{
     border:2px solid black;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 #table-container > table td{
    border-bottom: 2px solid black;

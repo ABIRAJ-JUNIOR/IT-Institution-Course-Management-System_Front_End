@@ -72,7 +72,10 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required>
                     </div>
-
+                    <div class="form-group">
+                        <label for="profilepic">Profile Picture</label>
+                        <input type="file" id="profilepic" name="profilepic" >
+                    </div>
                     <div id="button-container">
                         <button type="submit" class="main-btn">Register</button>
                         <button type="button"  class="main-btn" id="view-students-btn">View Students</button>
@@ -81,7 +84,7 @@
                 </form>
 
                 <div>
-                    <p id="user-registration-message"></p>
+                    <p id="user-registration-message" class="user-registration-message"></p>
                 </div>
 
             </div>
@@ -93,7 +96,7 @@
     </div>
 
     <!-- pop up box -->
-    <main class="overlay" id="overlay"></main>
+    <div class="overlay" id="overlay"></div>
     <main class="popupbox" id="popupbox">
         <div id="heading-container">
             <h1>Student</h1><h1>Details</h1>
@@ -102,7 +105,7 @@
         <div id="table-container">
             <table class="popup-table">
                 <thead>
-                    <tr>
+                    <tr class="table-head">
                         <th>NIC Number</th>
                         <th>Full Name</th>
                         <th>Phone Number</th>
@@ -110,7 +113,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="student-details-table">
+                <tbody id="student-details-table" class="student-details-table">
 
                    
                 </tbody>

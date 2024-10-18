@@ -1,7 +1,81 @@
 //Courses retrive from Local storage
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
+let courses = [];
+
+const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+const AddCourseURL = 'http://localhost:5251/api/Course/Add-Course';
+const UpdateCourseURL = 'http://localhost:5251/api/Course/Update-Course';
+const DeleteCourseURL = 'http://localhost:5251/api/Course/Delete-Course';
 
 
+//Fetch Students Data from Database
+async function GetAllCourses(){
+    fetch(GetAllCoursesURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        courses = data;
+        CoursesTable();
+        GetLastCourseId();
+    })
+};
+GetAllCourses()
+
+//Add Courses in Database
+async function AddCourse(CourseData){
+    await fetch(AddCourseURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(CourseData)
+    });
+    GetAllCourses();
+    CoursesTable();
+};
+
+//Update Course Fee
+async function UpdateCourseFee(CourseId , NewFee){
+    await fetch(`${UpdateCourseURL}/${CourseId}/${NewFee}`, {
+        method: "PUT",
+        // headers: {
+        //     "Content-Type": "application/json"
+        // },
+    });
+    GetAllCourses();
+    CoursesTable();
+};
+
+// Delete Course From Database
+async function DeleteCourse(CourseId){
+    await fetch(`${DeleteCourseURL}/${CourseId}`, {
+        method: "DELETE"
+    });
+};
+
+let students = [];
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+async function GetAllStudents(){
+    //Fetch Students Data from Database
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
+    })
+};
+GetAllStudents()
+
+
+const AddNotificationURL = 'http://localhost:5251/api/Notification/Add-Notification';
+// Add Notifications
+async function AddNotification(NotificationData){
+    await fetch(AddNotificationURL,{
+        method:'Post',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(NotificationData)
+
+    })
+}
 
 //Site Navebar
 const toggle = document.querySelector(".fa-bars")
@@ -16,21 +90,20 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%"
 })
 
-
 function generateCourseID(lastID) {
     let numericPart = parseInt(lastID.slice(1));
     numericPart++;
     let newID = "C" + numericPart.toString().padStart(3, "0");
-    lastCourseID = newID
     return newID;
 }
 
-
 let lastCourseID;
-if(courses.length != 0){
-    lastCourseID = courses[courses.length - 1].id
-}else{
-    lastCourseID = "C000";
+function GetLastCourseId(){
+    if(courses.length != 0){
+        lastCourseID = courses[courses.length - 1].id
+    }else{
+        lastCourseID = "C000";
+    }    
 }
 
 //Form Submit Function
@@ -44,8 +117,7 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
 
     const course = courses.find(c=>c.courseName == courseName && c.level == level)
     if(course){
-        course.totalFee = totalFee;
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        UpdateCourseFee(course.id , totalFee)
         document.getElementById('course-offerings-message').innerHTML = "Update Fee Successfully"
     }else{
         const CourseData = {
@@ -54,9 +126,17 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
             level,
             totalFee
         };
-        
-        courses.push(CourseData);
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        AddCourse(CourseData);
+
+        students.forEach(s => {
+            const NotificationData ={
+                nic:s.nic,
+                type:"Course",
+                sourceId:id,
+                date:new Date()
+            }
+            AddNotification(NotificationData);
+        });
 
         document.getElementById('course-offerings-message').innerHTML = "Added New Course"
     }
@@ -104,8 +184,7 @@ function removeCourseById(event,courseIdToRemove) {
     
     let indexToRemove = courses.findIndex(obj => obj.id === courseIdToRemove);
     if (indexToRemove !== -1) {
-        courses.splice(indexToRemove , 1)
-        localStorage.setItem('Courses', JSON.stringify(courses));
+        DeleteCourse(courseIdToRemove)
         document.getElementById('course-offerings-message-2').style.color = "Green";
         document.getElementById('course-offerings-message-2').textContent = "Course Removed Successfully";
         const row = event.target.parentElement.parentElement;

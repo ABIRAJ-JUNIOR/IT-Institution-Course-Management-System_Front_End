@@ -1,4 +1,15 @@
-const ContactUsDetails = JSON.parse(localStorage.getItem('ContactUs')) || [];
+const ContactUsURL = 'http://localhost:5251/api/ContactUs/Add-ContactUs-Details';
+
+async function AddContactUs(ContactUsDetails){
+    await fetch((ContactUsURL),{
+        method:'POST',
+        headers:{
+           "Content-Type": "application/json"
+        },
+        body:JSON.stringify(ContactUsDetails)
+    });
+}
+
 
 document.getElementById('contactUsForm').addEventListener("submit" , (event)=>{
     event.preventDefault();
@@ -17,8 +28,6 @@ document.getElementById('contactUsForm').addEventListener("submit" , (event)=>{
         submitDate:today
     }
 
-    ContactUsDetails.push(ContactUsDetails);
-    localStorage.setItem('ContactUs', JSON.stringify(ContactUsDetails));
-    
+    AddContactUs(ContactUsDetails)
     event.target.reset();
 })

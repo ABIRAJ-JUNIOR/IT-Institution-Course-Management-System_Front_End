@@ -25,7 +25,7 @@ nav{
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 .DashBoard{
-  margin: 10px 0 25px 10px;
+  margin: 4px 0 25px 30px;
 }
 .DashBoard span{
   font-weight: bold;
@@ -125,6 +125,9 @@ a:hover{
   font-size: 22px;
   padding: 10px;
 }
+.greeting{
+  color: #0056b3;
+}
 
 /* Courses */
 .main-course{
@@ -219,138 +222,169 @@ a:hover{
 
 
 /* Personal Information */
-.main-Profile{
-  margin-top: 25px;
+#profile-container .row{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  gap: 100px;
 }
-.main-Profile h1{
+
+#profile-container .heading{
   font-size: 30px;
 }
-.profile-box{
-  width: 600px;
-  padding: 20px;
-  margin-top: 10px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-  line-height: 30px;
+
+.profile-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 147%;
 }
 
-.heading {
-  display: flex;
-  gap: 10px;
-}
-.heading h1::first-letter{
-  color: orange;
-}
-
-table{
-  width: 95%;
-  padding: 20px;
-}
-#profile-form label{
-  font-weight: 550;
-  font-size: 1.5rem;
-  font-family: "Poppins", sans-serif;
-  font-style: normal; 
-  color: #1d232c;
-  line-height: 50px;
-}
-#profile-form input{
+#profile-form {
   width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  margin-left: 25px;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-}
-#button-container{
-  padding-left: 20px;
-  display: flex;
-  gap: 15px;
 }
 
-#button-container button{
-  padding: 8px 15px;
-  font-size: 18px;
-  font-weight: 700;
-  border-radius: 5px;
+.form-group {
+  margin-bottom: 20px;
 }
-#update-button{
-  background-color: rgb(0, 153, 255);
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+#button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.main-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
   color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.main-btn:last-child {
+  margin-right: 0;
+}
+
+.main-btn:hover {
+  background-color: #0056b3;
+}
+
+#Cancel-button {
+  background-color: rgb(198, 57, 57);
+  display: none;
+}
+
+#Cancel-button:hover {
+  background-color: rgb(150, 28, 28);
 }
 
 #save-button{
-  background-color: #4CAF50;
-  display: none;
-  color: white;
+display: none;
 }
-
-#Cancel-button{
-  background-color: red;
-  color: white;
-  display: none;
-}
-
-
 
 /* Password Change */
-.main-password-change{
-  margin-top:15px ;
+
+#password-container .row{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  gap: 100px;
 }
-.main-password-change h1{
+
+.password-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 120%;
+}
+
+#password-container .heading{
   font-size: 30px;
 }
-.password-box{
-  width: 600px;
-  padding: 20px;
-  margin-top: 10px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-  line-height: 30px;
+
+.form-group {
+  margin-bottom: 20px;
 }
 
-.heading {
-  display: flex;
-  gap: 10px;
-}
-.heading h1::first-letter{
-  color: orange;
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
 }
 
-table{
-  width: 95%;
-  padding: 20px;
-}
-#password-form label{
-  font-weight: 550;
-  font-size: 1.5rem;
-  font-family: "Poppins", sans-serif;
-  font-style: normal; 
-  color: #1d232c;
-  line-height: 50px;
-}
-#password-form input{
+input[type="password"] {
   width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
   outline: none;
-  border-radius: 5px;
-  margin-left: 25px;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-#update-password{
-  background-color: rgb(0, 153, 255);
+#button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.main-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
   color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.col2 >img {
-  margin-top: 50px;
+.main-btn:hover {
+  background-color: #0056b3;
 }
 
 
@@ -363,7 +397,7 @@ table{
   height: 100%;
   top: 0;
   left: 0;
-  opacity: 0.9;
+  opacity: 0.7;
   display: none;
 }
 
@@ -372,37 +406,42 @@ table{
   background-color: rgb(255, 255, 255);
   color: black;
   width: 40%;
-  height: 50%;
+  height: 60%;
   border-radius: 10px;
   left: 50%;
   padding: 20px;
   top: 50%;
   transform: translate(-50%,-50%);
   background-color: rgb(238, 235, 235);
-  overflow: auto;
   display: none;
- 
 }
 
 #heading-container > h1::first-letter {
   color:orange;
   font-size: larger;
 }
+
 #notification-container{
-  margin-top: 25px;
+  height: 80%;
+  overflow: auto;
+  scrollbar-width: none;
 }
 .reminder{
+  margin-top: 8px;
   background-color: lightgray;
-  margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.reminder:hover{
+  scale: 0.98;
+}
 .fa-circle-xmark{
   font-size: 25px;
   cursor: pointer;
+  padding: 0px 0px 0px 5px;
 }
 .fa-circle-xmark:hover{
   color: red;
@@ -428,4 +467,95 @@ table{
 
 .fa-bell{
   font-size: 40px;
+}
+
+
+/* Profile Picture */
+.profilepic-container{
+  display: flex;
+  justify-content: center;
+}
+.profile-picture{
+  margin: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-size: cover;
+}
+
+
+/* History */
+
+.history-table-container {
+  display: flex;
+  justify-content: space-between; 
+  margin: 20px; 
+}
+
+.course-table, .payment-table {
+  flex: 1; 
+  margin: 0 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
+
+.history-table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+.history-table th {
+  padding: 10px; 
+  text-align: left; 
+  border-bottom: 1px solid #ddd; 
+}
+
+.history-table td {
+  padding: 10px; 
+  text-align: left; 
+  border-bottom: 1px solid #ddd; 
+}
+
+.history-table th {
+  background-color: #f4f4f4; 
+  font-weight: bold; 
+}
+
+.history-table tbody tr:hover {
+  background-color: #f1f1f1; 
+}
+
+/* Update Profile Picture */
+
+.profile-pic-update-form{
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.delete-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff0040;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.delete-btn:last-child {
+  margin-right: 0;
+}
+
+.delete-btn:hover {
+  background-color: #900024;
+}
+
+.profilePic-Update{
+  margin-bottom: 20px;
 }
