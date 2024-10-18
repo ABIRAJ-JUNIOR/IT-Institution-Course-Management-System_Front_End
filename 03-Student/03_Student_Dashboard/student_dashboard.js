@@ -17,13 +17,90 @@ logoutButton.addEventListener('click', function() {
   logout();
 });
 
-let students  = JSON.parse(localStorage.getItem('Students')) || [];
-let courses = JSON.parse(localStorage.getItem('Courses')) || [];
-let courseEnrollData = JSON.parse(localStorage.getItem('CourseEnrollDetails')) || [];
-let installments  = JSON.parse(localStorage.getItem('InstallmentDetails')) || [];
-let FUllpaymentDetails  = JSON.parse(localStorage.getItem('FullPaymentDetails')) || [];
+let students  = [];
+let courses = [];
+let courseEnrollData = [];
+let installments  = [];
+let FUllpaymentDetails  = [];
+let Notifications = [];
 
+const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
+//Fetch Students Data from Database
+async function GetAllStudents(){
+    fetch(GetAllStudentsURL).then((response) => {
+        return response.json();
+    }).then((data) => {
+        students = data;
 
+        ProfilePicLoading();
+        UpdatePersonalInformation();
+        PasswordChange();
+
+        const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+        //Fetch Students Data from Database
+        async function GetAllCourses(){
+            fetch(GetAllCoursesURL).then((response) => {
+                return response.json();
+            }).then((data) => {
+                courses = data;
+
+                const GetAllCourseEnrollURL = 'http://localhost:5251/api/CourseEnroll/Get-All-Enroll-Data';
+                //Fetch CourseEnrollData Data from Database
+                async function GetAllCourseEnrollData(){
+                    fetch(GetAllCourseEnrollURL).then((response) => {
+                        return response.json();
+                    }).then((data) => {
+                        courseEnrollData = data;
+                        HistoryCourseTable();
+
+                        const GetAllInstallmentsURL = 'http://localhost:5251/api/Installment/Get-All-Installments';
+                        //Fetch Installments Data from Database
+                        async function GetAllInstallments(){
+                            fetch(GetAllInstallmentsURL).then((response) => {
+                                return response.json();
+                            }).then((data) => {
+                                installments = data;
+
+                                const GetAllFullPaymentURL = 'http://localhost:5251/api/FullPayment/Get-All-FullPayments';
+                                //Fetch Fullpayments Data from Database
+                                async function GetAllFullPayments(){
+                                    fetch(GetAllFullPaymentURL).then((response) => {
+                                        return response.json();
+                                    }).then((data) => {
+                                        FUllpaymentDetails = data;
+
+                                        PageLoadingDetails();
+                                        UpdateCourseInActive();
+                                        HistoryPaymentTable();
+
+                                        const GetAllNotificationsURL = "http://localhost:5251/api/Notification/Get-All-Notifications";
+                                        // Fetch All Notification Data From Database
+                                        async function GetAllNotifications(){
+                                            fetch(GetAllNotificationsURL).then((response) => {
+                                                return response.json();
+                                            }).then((data)=> {
+                                                Notifications = data
+                                                RedDot();
+                                                NotificationsTable();
+                                                ReminderNotification();
+                                            })
+                                        }
+                                        GetAllNotifications();
+                                    })
+                                };
+                                GetAllFullPayments();
+                            })
+                        };
+                        GetAllInstallments();
+                    })
+                };
+                GetAllCourseEnrollData();
+            })
+        };
+        GetAllCourses();
+    })
+};
+GetAllStudents();
 
 
 document.addEventListener("DOMContentLoaded" , ()=>{
