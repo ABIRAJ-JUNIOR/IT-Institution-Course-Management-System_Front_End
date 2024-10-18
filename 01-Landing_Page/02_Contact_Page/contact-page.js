@@ -30,4 +30,4 @@ document.getElementById('contactUsForm').addEventListener("submit" , (event)=>{
 
     AddContactUs(ContactUsDetails)
     event.target.reset();
-});
+})

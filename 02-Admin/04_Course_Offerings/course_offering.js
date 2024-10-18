@@ -2,6 +2,11 @@
 let courses = [];
 
 const GetAllCoursesURL = 'http://localhost:5251/api/Course/Get-All-Courses';
+const AddCourseURL = 'http://localhost:5251/api/Course/Add-Course';
+const UpdateCourseURL = 'http://localhost:5251/api/Course/Update-Course';
+const DeleteCourseURL = 'http://localhost:5251/api/Course/Delete-Course';
+
+
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
@@ -14,7 +19,6 @@ async function GetAllCourses(){
 };
 GetAllCourses()
 
-const AddCourseURL = 'http://localhost:5251/api/Course/Add-Course';
 //Add Courses in Database
 async function AddCourse(CourseData){
     await fetch(AddCourseURL, {
@@ -28,7 +32,6 @@ async function AddCourse(CourseData){
     CoursesTable();
 };
 
-const UpdateCourseURL = 'http://localhost:5251/api/Course/Update-Course';
 //Update Course Fee
 async function UpdateCourseFee(CourseId , NewFee){
     await fetch(`${UpdateCourseURL}/${CourseId}/${NewFee}`, {
@@ -41,7 +44,6 @@ async function UpdateCourseFee(CourseId , NewFee){
     CoursesTable();
 };
 
-const DeleteCourseURL = 'http://localhost:5251/api/Course/Delete-Course';
 // Delete Course From Database
 async function DeleteCourse(CourseId){
     await fetch(`${DeleteCourseURL}/${CourseId}`, {
@@ -113,7 +115,7 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
     const totalFee = Number(document.getElementById("fee").value.trim());
     let id = generateCourseID(lastCourseID);
 
-    const course = courses.find(c=>c.courseName.toLowerCase() == courseName.toLowerCase() && c.level == level)
+    const course = courses.find(c=>c.courseName == courseName && c.level == level)
     if(course){
         UpdateCourseFee(course.id , totalFee)
         document.getElementById('course-offerings-message').innerHTML = "Update Fee Successfully"

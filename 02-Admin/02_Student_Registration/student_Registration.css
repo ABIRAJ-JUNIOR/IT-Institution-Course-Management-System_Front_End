@@ -248,9 +248,10 @@ input:focus {
 
 /* Pop Up Table */
 
- #table-container{
+#table-container{
     position: relative;
     overflow: auto;
+    scrollbar-width: none;
     height: 85%;
 }
 

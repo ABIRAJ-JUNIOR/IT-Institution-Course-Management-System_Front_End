@@ -22,9 +22,11 @@ async function GetAllCourseEnrollData(){
 };
 GetAllCourseEnrollData()
 
+
 function encryption(password){
     return btoa(password)
 }
+
 document.getElementById('login-form').addEventListener('submit' , (event)=>{
     event.preventDefault();
 

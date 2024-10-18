@@ -11,6 +11,7 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%"
 })
 
+
 let students = [];
 const GetAllStudentsURL = 'http://localhost:5251/api/Student/Get-All-Students';
 async function GetAllStudents(){
@@ -414,3 +415,4 @@ if(logoutButton){
         logout();
     });
 }
+
