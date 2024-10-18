@@ -565,75 +565,78 @@ function removeCourseNotification(event,notificationId){
 
     
     //Course Automatically InActive After Reach The DeadLine And If Student Paid Payment
-    function UpdateCourseInActive(){
-        const student = students.find(s => s.nic == nic);
-        const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId);
+function UpdateCourseInActive(){
+    const student = students.find(s => s.nic == nic);
 
-        let installment;
-        if(CourseEnroll.installmentId != 0 ){
-            installment = installments.find(i => i.id == CourseEnroll.installmentId);
-        }
+    const CourseEnroll = courseEnrollData.find(c => c.id == student.courseEnrollId);
 
-        let fullPayment ;
-        if(CourseEnroll.fullPaymentId != 0){
-            fullPayment = FUllpaymentDetails.find(f => f.id == CourseEnroll.fullPaymentId)
-        }
-    
-        //Function For Add months in date
-        function addMonths(date, months) {
-            const newDate = new Date(date); 
-            newDate.setMonth(newDate.getMonth() + months); 
-            return newDate;
-        }
+    let installment;
+    if(CourseEnroll.installmentId != null ){
+        installment = installments.find(i => i.id == CourseEnroll.installmentId);
+    }
 
-        if(CourseEnroll.status == "Active"){
+    let fullPayment ;
+    if(CourseEnroll.fullPaymentId != null){
+        fullPayment = FUllpaymentDetails.find(f => f.id == CourseEnroll.fullPaymentId)
+    }
 
-            if(CourseEnroll.fullPaymentId != 0){
+    //Function For Add months in date
+    function addMonths(date, months) {
+        const newDate = new Date(date); 
+        newDate.setMonth(newDate.getMonth() + months); 
+        return newDate;
+    }
+
+    if(CourseEnroll.status == "Active"){
+
+        if(CourseEnroll.fullPaymentId != null){
+            if(CourseEnroll.duration == 3){
+                const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
+                const monthsToAdd = 3;
+                const DeadLine = addMonths(EnrolledDate, monthsToAdd);
+        
+                if(DeadLine <= new Date()){
+                    const Status = "InActive"
+                    UpdateStatus(CourseEnroll.id, Status)
+                }
+                
+            }else if(CourseEnroll.duration == 6){
+                const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
+                const monthsToAdd = 6;
+                const DeadLine = addMonths(EnrolledDate, monthsToAdd);
+        
+                if(DeadLine <= new Date()){
+                    const Status = "InActive"
+                    UpdateStatus(CourseEnroll.id, Status)
+                }
+            }
+        }else if(CourseEnroll.installmentId != null){
+            if(installment.paymentDue <= 0){
                 if(CourseEnroll.duration == 3){
                     const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
                     const monthsToAdd = 3;
-                    const futureDate = addMonths(EnrolledDate, monthsToAdd);
+                    const DeadLine = addMonths(EnrolledDate, monthsToAdd);
             
-                    if(futureDate <= new Date()){
-                        CourseEnroll.status == "InActive";
+                    if(DeadLine <= new Date()){
+                        const Status = "InActive"
+                        UpdateStatus(CourseEnroll.id, Status)
                     }
                     
                 }else if(CourseEnroll.duration == 6){
                     const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
                     const monthsToAdd = 6;
-                    const futureDate = addMonths(EnrolledDate, monthsToAdd);
+                    const DeadLine = addMonths(EnrolledDate, monthsToAdd);
             
-                    if(futureDate <= new Date()){
-                        CourseEnroll.status == "InActive";
-                    }
-                }
-            }else if(CourseEnroll.installmentId != 0){
-                if(installment.paymentDue <= 0){
-                    if(CourseEnroll.duration == 3){
-                        const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
-                        const monthsToAdd = 3;
-                        const futureDate = addMonths(EnrolledDate, monthsToAdd);
-                
-                        if(futureDate <= new Date()){
-                            CourseEnroll.status == "InActive";
-                        }
-                        
-                    }else if(CourseEnroll.duration == 6){
-                        const EnrolledDate = new Date(CourseEnroll.courseEnrollDate);
-                        const monthsToAdd = 6;
-                        const futureDate = addMonths(EnrolledDate, monthsToAdd);
-                
-                        if(futureDate <= new Date()){
-                            CourseEnroll.status == "InActive";
-                        }
+                    if(DeadLine <= new Date()){
+                        const Status = "InActive"
+                        UpdateStatus(CourseEnroll.id, Status)
                     }
                 }
             }
         }
-        localStorage.setItem('CourseEnrollDetails' , JSON.stringify(courseEnrollData));
     }
     
-    UpdateCourseInActive();
+}
 
 
 
