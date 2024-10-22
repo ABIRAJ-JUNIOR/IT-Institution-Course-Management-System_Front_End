@@ -573,13 +573,15 @@ function NotificationsTable(){
         if(N.nic == nic && N.isDeleted != true){
             if(N.type == "Course"){
                 const course = courses.find(c => c.id == N.sourceId)
-                const div = document.createElement('div');
-                div.className = "reminder";
-                div.innerHTML = `
-                    <p id="message">"Exciting news! We’re thrilled to announce the launch of our new course, <strong>${course.courseName} for ${course.level}</strong>, starting on <strong>${new Date(N.date).toDateString()}</strong></p>
-                    <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
-                `;
-                notificationContainer.appendChild(div);
+                if(course){
+                    const div = document.createElement('div');
+                    div.className = "reminder";
+                    div.innerHTML = `
+                        <p id="message">"Exciting news! We’re thrilled to announce the launch of our new course, <strong>${course.courseName} for ${course.level}</strong>, starting on <strong>${new Date(N.date).toDateString()}</strong></p>
+                        <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
+                    `;
+                    notificationContainer.appendChild(div);
+                }
             }else if(N.type == "FullPayment"){
                 const fullpayment = FUllpaymentDetails.find(f => f.id == N.sourceId);
                 const courseEnroll = courseEnrollData.find(ce => ce.fullPaymentId == fullpayment.id)
