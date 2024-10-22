@@ -3,10 +3,15 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents()
 
@@ -15,10 +20,15 @@ const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-E
 async function GetAllCourseEnrollData(){
     //Fetch Students Data from Database
     fetch(GetAllCourseEnrollURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courseEnrollData = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourseEnrollData()
 

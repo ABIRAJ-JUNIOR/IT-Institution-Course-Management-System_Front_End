@@ -5,11 +5,16 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
         StudentNameShow();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents()
 
@@ -19,12 +24,17 @@ const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courses = data;
         DuplicateCourseRemove();
 
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourses()
 
@@ -34,11 +44,16 @@ const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-E
 //Fetch CourseEnrollData Data from Database
 async function GetAllCourseEnrollData(){
     fetch(GetAllCourseEnrollURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courseEnrollData = data;
         GetLastCourseEnrollId();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourseEnrollData()
 
@@ -51,6 +66,8 @@ async function UpdateCourseEnrollId(StudentNic , CourseEnrollId){
         headers: {
             "Content-Type": "application/json"
         },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 };
 
@@ -64,6 +81,8 @@ async function AddCourseEnrollData(CourseEnrollData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(CourseEnrollData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 };
 

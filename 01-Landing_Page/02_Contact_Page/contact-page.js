@@ -7,6 +7,8 @@ async function AddContactUs(ContactUsDetails){
            "Content-Type": "application/json"
         },
         body:JSON.stringify(ContactUsDetails)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 }
 

@@ -29,6 +29,9 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
@@ -41,6 +44,9 @@ async function GetAllStudents(){
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
                 return response.json();
             }).then((data) => {
                 courses = data;
@@ -49,6 +55,9 @@ async function GetAllStudents(){
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
                         return response.json();
                     }).then((data) => {
                         courseEnrollData = data;
@@ -58,6 +67,9 @@ async function GetAllStudents(){
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
                                 return response.json();
                             }).then((data) => {
                                 installments = data;
@@ -66,6 +78,9 @@ async function GetAllStudents(){
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
+                                        if (!response.ok) {
+                                            throw new Error('Network response was not ok ' + response.statusText);
+                                        }
                                         return response.json();
                                     }).then((data) => {
                                         FUllpaymentDetails = data;
@@ -78,28 +93,53 @@ async function GetAllStudents(){
                                         // Fetch All Notification Data From Database
                                         async function GetAllNotifications(){
                                             fetch(GetAllNotificationsURL).then((response) => {
+                                                if (!response.ok) {
+                                                    throw new Error('Network response was not ok ' + response.statusText);
+                                                }
                                                 return response.json();
                                             }).then((data)=> {
                                                 Notifications = data
                                                 RedDot();
                                                 NotificationsTable();
                                                 ReminderNotification();
-                                            })
+
+                                            }).catch(error => {
+                                                console.error('There was a problem with the fetch operation:', error);
+                                            });
+
                                         }
                                         GetAllNotifications();
-                                    })
+
+                                    }).catch(error => {
+                                        console.error('There was a problem with the fetch operation:', error);
+                                    });
+
                                 };
                                 GetAllFullPayments();
-                            })
+
+                            }).catch(error => {
+                                console.error('There was a problem with the fetch operation:', error);
+                            });
+
                         };
                         GetAllInstallments();
-                    })
+
+                    }).catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+
                 };
                 GetAllCourseEnrollData();
-            })
+
+            }).catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
         };
         GetAllCourses();
-    })
+
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents();
 
@@ -115,6 +155,8 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(StudentUpdateData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 
 };
@@ -128,6 +170,8 @@ async function UpdatePassword(StudentNic , NewPassword){
             "Content-Type":"application/json"
         },
         body:JSON.stringify(NewPassword)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 }
 
@@ -139,6 +183,8 @@ async function UpdateStatus(CourseEnrollId , Status){
         headers:{
             "Content-Type":"application/json"
         },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 }
 
@@ -147,11 +193,16 @@ const GetAllNotificationsURL = "https://localhost:7069/api/Notification/Get-All-
 // Fetch All Notification Data From Database
 async function GetAllNotifications(){
     fetch(GetAllNotificationsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data)=> {
         Notifications = data
         RedDot();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }
 GetAllNotifications();
 
@@ -165,7 +216,9 @@ async function AddNotification(NotificationData){
         },
         body:JSON.stringify(NotificationData)
 
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
     GetAllNotifications();
 }
 
@@ -173,6 +226,8 @@ const DeleteNotificationURL = 'https://localhost:7069/api/Notification/Delete-No
 async function DeleteNotification(Id){
     await fetch(`${DeleteNotificationURL}/${Id}`,{
         method:'DELETE'
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllNotifications();
 }
@@ -180,11 +235,16 @@ async function DeleteNotification(Id){
 //Fetch Students Data from Database
 async function GetAllStudentsDetails(){
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
         ProfilePicLoading();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudentsDetails();
 
@@ -193,7 +253,9 @@ async function UpdateProfilePic(formdata){
     await fetch(UpdateProfilePicURL, {
         method:'PUT',
         body:formdata
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
     GetAllStudentsDetails();
 }
 
@@ -514,7 +576,7 @@ function NotificationsTable(){
                 const div = document.createElement('div');
                 div.className = "reminder";
                 div.innerHTML = `
-                    <p id="message">"Exciting news! We’re thrilled to announce the launch of our new course, <strong>${course.courseName}  ${course.level}</strong>, starting on <strong>${new Date(N.date).toDateString()}</strong></p>
+                    <p id="message">"Exciting news! We’re thrilled to announce the launch of our new course, <strong>${course.courseName} for ${course.level}</strong>, starting on <strong>${new Date(N.date).toDateString()}</strong></p>
                     <i class="fa-regular fa-circle-xmark" onclick="removeCourseNotification(event,'${N.id}')"></i>
                 `;
                 notificationContainer.appendChild(div);

@@ -17,11 +17,16 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
         ShowTable();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents()
 
@@ -32,6 +37,8 @@ async function AddStudent(formData){
     await fetch(AddStudentURL, {
         method: "POST",
         body:formData
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllStudents();
     ShowTable();
@@ -47,6 +54,8 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(StudentUpdateData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 };
 
@@ -56,6 +65,8 @@ async function DeleteStudent(StudentNic){
     // Delete Student
     await fetch(`${DeleteStudentURL}/${StudentNic}`, {
         method: "DELETE"
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllStudents()
 };

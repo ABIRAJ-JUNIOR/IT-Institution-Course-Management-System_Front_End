@@ -23,6 +23,9 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
@@ -31,6 +34,9 @@ async function GetAllStudents(){
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
                 return response.json();
             }).then((data) => {
                 courses = data;
@@ -39,6 +45,9 @@ async function GetAllStudents(){
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
                         return response.json();
                     }).then((data) => {
                         courseEnrollData = data;
@@ -47,6 +56,9 @@ async function GetAllStudents(){
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok ' + response.statusText);
+                                }
                                 return response.json();
                             }).then((data) => {
                                 InstallmentsDetails = data;
@@ -55,23 +67,45 @@ async function GetAllStudents(){
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
+                                        if (!response.ok) {
+                                            throw new Error('Network response was not ok ' + response.statusText);
+                                        }
                                         return response.json();
                                     }).then((data) => {
                                         FullpaymentDetails = data;
                                         DataActivate();
-                                    })
+                                    }).catch(error => {
+                                        console.error('There was a problem with the fetch operation:', error);
+                                    });
+
                                 };
                                 GetAllFullPayments()
-                            })
+
+                            }).catch(error => {
+                                console.error('There was a problem with the fetch operation:', error);
+                            });
+
                         };
                         GetAllInstallments()
-                    })
+
+                    }).catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+
                 };
                 GetAllCourseEnrollData()
-            })
+
+            }).catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
         };
         GetAllCourses()
-    })
+
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+    
 };
 GetAllStudents()
 

@@ -10,12 +10,17 @@ const DeleteCourseURL = 'https://localhost:7069/api/Course/Delete-Course';
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courses = data;
         CoursesTable();
         GetLastCourseId();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourses()
 
@@ -27,6 +32,8 @@ async function AddCourse(CourseData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(CourseData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllCourses();
     CoursesTable();
@@ -36,9 +43,8 @@ async function AddCourse(CourseData){
 async function UpdateCourseFee(CourseId , NewFee){
     await fetch(`${UpdateCourseURL}/${CourseId}/${NewFee}`, {
         method: "PUT",
-        // headers: {
-        //     "Content-Type": "application/json"
-        // },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllCourses();
     CoursesTable();
@@ -48,6 +54,8 @@ async function UpdateCourseFee(CourseId , NewFee){
 async function DeleteCourse(CourseId){
     await fetch(`${DeleteCourseURL}/${CourseId}`, {
         method: "DELETE"
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
 };
 
@@ -56,10 +64,15 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents()
 
@@ -74,7 +87,9 @@ async function AddNotification(NotificationData){
         },
         body:JSON.stringify(NotificationData)
 
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
 //Site Navebar

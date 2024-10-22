@@ -23,10 +23,15 @@ const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         students = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllStudents();;
 
@@ -35,10 +40,15 @@ const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
 //Fetch Students Data from Database
 async function GetAllCourses(){
     fetch(GetAllCoursesURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courses = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourses();
 
@@ -46,10 +56,15 @@ const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-E
 //Fetch CourseEnrollData Data from Database
 async function GetAllCourseEnrollData(){
     fetch(GetAllCourseEnrollURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         courseEnrollData = data;
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllCourseEnrollData();
 
@@ -57,12 +72,17 @@ const GetAllInstallmentsURL = 'https://localhost:7069/api/Installment/Get-All-In
 //Fetch Installments Data from Database
 async function GetAllInstallments(){
     fetch(GetAllInstallmentsURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         InstallmentDetails = data;
         GetLastInstallmentId();
         displayInstallmentPaymentTable();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
     
 };
 GetAllInstallments();
@@ -71,12 +91,17 @@ const GetAllFullPaymentURL = 'https://localhost:7069/api/FullPayment/Get-All-Ful
 //Fetch Fullpayments Data from Database
 async function GetAllFullPayments(){
     fetch(GetAllFullPaymentURL).then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         return response.json();
     }).then((data) => {
         FullpaymentDetails = data;
         GetLastFullpaymentId();
         displayFullPaymentTable();
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 };
 GetAllFullPayments();
 
@@ -89,6 +114,8 @@ async function AddFullPayment(FullPaymentData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(FullPaymentData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllFullPayments();
     displayFullPaymentTable();
@@ -103,6 +130,8 @@ async function UpdateStatus(CourseEnrollId , Status){
         headers:{
             "Content-Type":"application/json"
         },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllCourseEnrollData();
 }
@@ -115,6 +144,8 @@ async function UpdatePaymentId(CourseEnrollId , InstallmentId , FullPaymentId){
         headers:{
             "Content-Type":"application/json"
         },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllCourseEnrollData();
 }
@@ -127,6 +158,8 @@ async function UpdateInstallment(installmentId , paidAmount){
         headers:{
             "Content-Type":"application/json"
         },
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllInstallments();
 }
@@ -140,6 +173,8 @@ async function AddInstallment(InstallmentData){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(InstallmentData)
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
     });
     GetAllInstallments();
     displayInstallmentPaymentTable();
@@ -155,7 +190,9 @@ async function AddNotification(NotificationData){
         },
         body:JSON.stringify(NotificationData)
 
-    })
+    }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
 
