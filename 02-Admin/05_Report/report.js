@@ -247,9 +247,9 @@ function DataActivate(){
         document.getElementById('fee').value = `${installment.totalAmount}/=`;
         document.getElementById('plan').value = `Installment`;
         document.getElementById('installments').value = CourseEnrollDetails.duration;
-        document.getElementById('installment-amount').value = `${installment.installmentAmount}/=`;
-        document.getElementById('payment-paid').value =`${installment.paymentPaid}/=` ;
-        document.getElementById('payment-due').value = `${installment.paymentDue}/=`;
+        document.getElementById('installment-amount').value = `${(installment.installmentAmount).toFixed(0)}/=`;
+        document.getElementById('payment-paid').value =`${(installment.paymentPaid).toFixed(0)}/=` ;
+        document.getElementById('payment-due').value = `${(installment.paymentDue).toFixed(0) < 0 ? 0:(installment.paymentDue)}/=`;
         document.getElementById('payment-date').value = new Date(installment.paymentDate).toDateString();
     
         //Hide Full payment

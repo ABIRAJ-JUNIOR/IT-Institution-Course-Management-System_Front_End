@@ -341,10 +341,10 @@ function PageLoadingDetails(){
             document.getElementById("p3").textContent = `Full Payment Done`
             document.getElementById("p4").textContent = `Payment Date : ${new Date(fullPayment.paymentDate).toDateString()}`
         }else if(installment){
-            document.getElementById("p1").textContent = `Course Fee   : ${installment.totalAmount}`
+            document.getElementById("p1").textContent = `Course Fee   : ${(installment.totalAmount).toFixed(0)}`
             document.getElementById("p2").textContent = `Payment Plan : Installment`
-            document.getElementById("p3").textContent = `Payment Paid : ${installment.paymentPaid}`
-            document.getElementById("p4").textContent = `Payment Due : ${installment.paymentDue}`
+            document.getElementById("p3").textContent = `Payment Paid : ${(installment.paymentPaid).toFixed(0)}`
+            document.getElementById("p4").textContent = `Payment Due : ${(installment.paymentDue).toFixed(0) < 0 ? 0:(installment.paymentDue).toFixed(0)}`
             document.getElementById("p5").textContent = `Payment Date : ${new Date(installment.paymentDate).toDateString()}`
         }else{
             document.getElementById("p1").textContent = `Payment Pending .....`

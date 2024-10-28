@@ -219,10 +219,10 @@ document.getElementById('nic').addEventListener("keyup" , () =>{
                         document.getElementById('total-course-fee').textContent = `${element.totalFee} Rs`;
                         document.getElementById('total-amount').textContent = `${element.totalFee} Rs`;
                         if(CourseEnrollDetail.duration == "3"){
-                            installmentAmount = element.totalFee / 3;
+                            installmentAmount = (element.totalFee / 3).toFixed(0);
                             document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
                         }else if(CourseEnrollDetail.duration == "6"){
-                                installmentAmount = element.totalFee / 6;
+                                installmentAmount = (element.totalFee / 6).toFixed(0);
                                 document.getElementById('installment-amount').textContent = `${installmentAmount} Rs / Month`
                         }
                         totalAmount = element.totalFee;
@@ -455,9 +455,9 @@ function displayInstallmentPaymentTable(){
         row.innerHTML = `
             <td>${installment.id}</td>
             <td>${student.fullName}</td>
-            <td>${installment.installmentAmount}/= </td>
-            <td>${installment.paymentPaid}/= </td>
-            <td>${installment.paymentDue}/= </td>
+            <td>${(installment.installmentAmount).toFixed(0)}/= </td>
+            <td>${(installment.paymentPaid).toFixed(0)}/= </td>
+            <td>${(installment.paymentDue).toFixed(0) < 0 ? 0 : (installment.paymentDue).toFixed(0)}/= </td>
         `;
         tableBody.appendChild(row);
     });
