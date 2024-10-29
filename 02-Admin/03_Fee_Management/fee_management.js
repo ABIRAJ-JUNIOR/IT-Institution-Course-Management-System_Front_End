@@ -204,7 +204,7 @@ let installmentAmount = 0;
 
 document.getElementById('nic').addEventListener("keyup" , () =>{
     const nic = document.getElementById('nic').value.trim();
-    const student = students.find((student) => student.nic == nic);
+    const student = students.find((student) => student.nic.toLowerCase() == nic.toLowerCase());
             
     if(student){
         if(student.courseEnrollId != null){
