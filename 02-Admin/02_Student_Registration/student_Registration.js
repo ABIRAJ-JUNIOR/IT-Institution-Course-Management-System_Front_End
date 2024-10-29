@@ -11,9 +11,10 @@ toggleClose.addEventListener("click" , function(){
     sideNavebar.style.right = "-60%"
 })
 
+const mainURL = 'http://localhost:5091'
 
 let students = [];
-const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = mainURL + '/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
@@ -31,7 +32,7 @@ async function GetAllStudents(){
 GetAllStudents()
 
 //Add Student in Database
-const AddStudentURL = 'https://localhost:7069/api/Student/Add-student';
+const AddStudentURL = mainURL + '/api/Student/Add-student';
 async function AddStudent(formData){
     // Create new student
     await fetch(AddStudentURL, {
@@ -45,7 +46,7 @@ async function AddStudent(formData){
 };
 
 //Update Student Contact Details
-const UpdateStudentURL = 'https://localhost:7069/api/Student/Update-Student';
+const UpdateStudentURL = mainURL + '/api/Student/Update-Student';
 async function UpdateStudent(StudentNic , StudentUpdateData){
     // Update Student
     await fetch(`${UpdateStudentURL}/${StudentNic}`, {
@@ -60,7 +61,7 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
 };
 
 // Delete Student From Database
-const DeleteStudentURL = 'https://localhost:7069/api/Student/Delete-Student'
+const DeleteStudentURL = mainURL + '/api/Student/Delete-Student'
 async function DeleteStudent(StudentNic){
     // Delete Student
     await fetch(`${DeleteStudentURL}/${StudentNic}`, {

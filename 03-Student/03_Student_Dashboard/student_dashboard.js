@@ -24,8 +24,9 @@ let installments  = [];
 let FUllpaymentDetails  = [];
 let Notifications = [];
 
+const mainURL = 'http://localhost:5091';
 
-const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = mainURL + '/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -40,7 +41,7 @@ async function GetAllStudents(){
         UpdatePersonalInformation();
         PasswordChange();
 
-        const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
+        const GetAllCoursesURL = mainURL + '/api/Course/Get-All-Courses';
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
@@ -51,7 +52,7 @@ async function GetAllStudents(){
             }).then((data) => {
                 courses = data;
 
-                const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
+                const GetAllCourseEnrollURL = mainURL + '/api/CourseEnroll/Get-All-Enroll-Data';
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -63,7 +64,7 @@ async function GetAllStudents(){
                         courseEnrollData = data;
                         HistoryCourseTable();
 
-                        const GetAllInstallmentsURL = 'https://localhost:7069/api/Installment/Get-All-Installments';
+                        const GetAllInstallmentsURL = mainURL + '/api/Installment/Get-All-Installments';
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
@@ -74,7 +75,7 @@ async function GetAllStudents(){
                             }).then((data) => {
                                 installments = data;
 
-                                const GetAllFullPaymentURL = 'https://localhost:7069/api/FullPayment/Get-All-FullPayments';
+                                const GetAllFullPaymentURL = mainURL + '/api/FullPayment/Get-All-FullPayments';
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
@@ -89,7 +90,7 @@ async function GetAllStudents(){
                                         UpdateCourseInActive();
                                         HistoryPaymentTable();
 
-                                        const GetAllNotificationsURL = "https://localhost:7069/api/Notification/Get-All-Notifications";
+                                        const GetAllNotificationsURL = mainURL + "/api/Notification/Get-All-Notifications";
                                         // Fetch All Notification Data From Database
                                         async function GetAllNotifications(){
                                             fetch(GetAllNotificationsURL).then((response) => {
@@ -103,9 +104,10 @@ async function GetAllStudents(){
                                                 NotificationsTable();
                                                 ReminderNotification();
 
-                                            }).catch(error => {
-                                                console.error('There was a problem with the fetch operation:', error);
-                                            });
+                                            })
+                                            // .catch(error => {
+                                            //     console.error('There was a problem with the fetch operation:', error);
+                                            // });
 
                                         }
                                         GetAllNotifications();
@@ -145,7 +147,7 @@ GetAllStudents();
 
 
 
-const UpdateStudentURL = 'https://localhost:7069/api/Student/Update-Student';
+const UpdateStudentURL = mainURL + '/api/Student/Update-Student';
 //Update Student Contact Details
 async function UpdateStudent(StudentNic , StudentUpdateData){
 
@@ -161,7 +163,7 @@ async function UpdateStudent(StudentNic , StudentUpdateData){
 
 };
 
-const PasswordChangeURL = 'https://localhost:7069/api/Student/Password-Change';
+const PasswordChangeURL = mainURL + '/api/Student/Password-Change';
 //Update Student Password
 async function UpdatePassword(StudentNic , NewPassword){
     await fetch(`${PasswordChangeURL}/${StudentNic}`,{
@@ -175,7 +177,7 @@ async function UpdatePassword(StudentNic , NewPassword){
     });
 }
 
-const UpdateStatusURL = 'https://localhost:7069/api/CourseEnroll/Update-Status';
+const UpdateStatusURL = mainURL + '/api/CourseEnroll/Update-Status';
 //Update CourseEnroll Status
 async function UpdateStatus(CourseEnrollId , Status){
     await fetch(`${UpdateStatusURL}/${CourseEnrollId}/${Status}`,{
@@ -189,7 +191,7 @@ async function UpdateStatus(CourseEnrollId , Status){
 }
 
 
-const GetAllNotificationsURL = "https://localhost:7069/api/Notification/Get-All-Notifications";
+const GetAllNotificationsURL = mainURL + "/api/Notification/Get-All-Notifications";
 // Fetch All Notification Data From Database
 async function GetAllNotifications(){
     fetch(GetAllNotificationsURL).then((response) => {
@@ -206,7 +208,7 @@ async function GetAllNotifications(){
 }
 GetAllNotifications();
 
-const AddNotificationURL = 'https://localhost:7069/api/Notification/Add-Notification';
+const AddNotificationURL = mainURL + '/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
     await fetch(AddNotificationURL,{
@@ -222,7 +224,7 @@ async function AddNotification(NotificationData){
     GetAllNotifications();
 }
 
-const DeleteNotificationURL = 'https://localhost:7069/api/Notification/Delete-Notification';
+const DeleteNotificationURL = mainURL + '/api/Notification/Delete-Notification';
 async function DeleteNotification(Id){
     await fetch(`${DeleteNotificationURL}/${Id}`,{
         method:'DELETE'
@@ -248,7 +250,7 @@ async function GetAllStudentsDetails(){
 };
 GetAllStudentsDetails();
 
-const UpdateProfilePicURL = 'https://localhost:7069/api/Student/Update-Profile-Picture';
+const UpdateProfilePicURL = mainURL + '/api/Student/Update-Profile-Picture';
 async function UpdateProfilePic(formdata){
     await fetch(UpdateProfilePicURL, {
         method:'PUT',
@@ -292,7 +294,7 @@ document.getElementById('settings-button').addEventListener("click" , () =>{
 function ProfilePicLoading(){
     const student = students.find(s => s.nic == nic);
     const imagePath = student.imagePath
-    const imageFullPath = `https://localhost:7069${imagePath}`.trim();
+    const imageFullPath = mainURL + `${imagePath}`.trim();
 
     const ProfilePicContainer = document.getElementById('profilepic-container');
     ProfilePicContainer.innerHTML = `
@@ -378,12 +380,24 @@ function UpdatePersonalInformation(){
         document.getElementById('save-button').style.display = 'block'
         document.getElementById('Cancel-button').style.display = 'block'
     })
+
+    // Phone number validation function
+    function validatePhone(phone) {
+        const phonePattern = /^[0-9]{10}$/;   // 10 digit numbers only
+        return phonePattern.test(phone);
+    }
+
     
     document.getElementById('save-button').addEventListener('click' , ()=>{
         const FullName = document.getElementById("fullname").value.trim();
         const Email = document.getElementById("email").value.trim();
         const Phone = document.getElementById("phone").value.trim();
     
+        if(validatePhone(Phone) != true) {
+            alert("Invalid phone number. Must be 10 digits long.")
+            return;
+        }
+
         const StudentUpdateData = {
             fullName:FullName,
             email:Email,

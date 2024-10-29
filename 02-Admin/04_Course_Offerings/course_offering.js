@@ -1,10 +1,12 @@
 //Courses retrive from Local storage
 let courses = [];
 
-const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
-const AddCourseURL = 'https://localhost:7069/api/Course/Add-Course';
-const UpdateCourseURL = 'https://localhost:7069/api/Course/Update-Course';
-const DeleteCourseURL = 'https://localhost:7069/api/Course/Delete-Course';
+const mainURL = 'http://localhost:5091'
+
+const GetAllCoursesURL = mainURL +  '/api/Course/Get-All-Courses';
+const AddCourseURL = mainURL +  '/api/Course/Add-Course';
+const UpdateCourseURL = mainURL +  '/api/Course/Update-Course';
+const DeleteCourseURL = mainURL +  '/api/Course/Delete-Course';
 
 
 //Fetch Students Data from Database
@@ -60,7 +62,7 @@ async function DeleteCourse(CourseId){
 };
 
 let students = [];
-const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = mainURL + '/api/Student/Get-All-Students';
 async function GetAllStudents(){
     //Fetch Students Data from Database
     fetch(GetAllStudentsURL).then((response) => {
@@ -77,7 +79,7 @@ async function GetAllStudents(){
 GetAllStudents()
 
 
-const AddNotificationURL = 'https://localhost:7069/api/Notification/Add-Notification';
+const AddNotificationURL = mainURL + '/api/Notification/Add-Notification';
 // Add Notifications
 async function AddNotification(NotificationData){
     await fetch(AddNotificationURL,{
@@ -130,7 +132,7 @@ document.getElementById("course-offerings-form").addEventListener('submit',(even
     const totalFee = Number(document.getElementById("fee").value.trim());
     let id = generateCourseID(lastCourseID);
 
-    const course = courses.find(c=>c.courseName == courseName && c.level == level)
+    const course = courses.find(c=>c.courseName.toLowerCase() == courseName.toLowerCase() && c.level.toLowerCase() == level.toLowerCase())
     if(course){
         UpdateCourseFee(course.id , totalFee)
         document.getElementById('course-offerings-message').innerHTML = "Update Fee Successfully"

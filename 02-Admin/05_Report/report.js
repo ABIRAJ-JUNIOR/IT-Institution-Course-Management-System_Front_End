@@ -17,9 +17,9 @@ let courseEnrollData = [];
 let InstallmentsDetails  = [];
 let FullpaymentDetails  = [];
 
+const mainURL = 'http://localhost:5091'
 
-
-const GetAllStudentsURL = 'https://localhost:7069/api/Student/Get-All-Students';
+const GetAllStudentsURL = mainURL + '/api/Student/Get-All-Students';
 //Fetch Students Data from Database
 async function GetAllStudents(){
     fetch(GetAllStudentsURL).then((response) => {
@@ -30,7 +30,7 @@ async function GetAllStudents(){
     }).then((data) => {
         students = data;
 
-        const GetAllCoursesURL = 'https://localhost:7069/api/Course/Get-All-Courses';
+        const GetAllCoursesURL = mainURL + '/api/Course/Get-All-Courses';
         //Fetch Students Data from Database
         async function GetAllCourses(){
             fetch(GetAllCoursesURL).then((response) => {
@@ -41,7 +41,7 @@ async function GetAllStudents(){
             }).then((data) => {
                 courses = data;
 
-                const GetAllCourseEnrollURL = 'https://localhost:7069/api/CourseEnroll/Get-All-Enroll-Data';
+                const GetAllCourseEnrollURL = mainURL + '/api/CourseEnroll/Get-All-Enroll-Data';
                 //Fetch CourseEnrollData Data from Database
                 async function GetAllCourseEnrollData(){
                     fetch(GetAllCourseEnrollURL).then((response) => {
@@ -52,7 +52,7 @@ async function GetAllStudents(){
                     }).then((data) => {
                         courseEnrollData = data;
 
-                        const GetAllInstallmentsURL = 'https://localhost:7069/api/Installment/Get-All-Installments';
+                        const GetAllInstallmentsURL = mainURL + '/api/Installment/Get-All-Installments';
                         //Fetch Installments Data from Database
                         async function GetAllInstallments(){
                             fetch(GetAllInstallmentsURL).then((response) => {
@@ -63,7 +63,7 @@ async function GetAllStudents(){
                             }).then((data) => {
                                 InstallmentsDetails = data;
 
-                                const GetAllFullPaymentURL = 'https://localhost:7069/api/FullPayment/Get-All-FullPayments';
+                                const GetAllFullPaymentURL = mainURL + '/api/FullPayment/Get-All-FullPayments';
                                 //Fetch Fullpayments Data from Database
                                 async function GetAllFullPayments(){
                                     fetch(GetAllFullPaymentURL).then((response) => {
@@ -114,7 +114,7 @@ GetAllStudents()
 function DataActivate(){
     document.getElementById("report-generate-btn").addEventListener("click",()=>{
         const nic = document.getElementById("search-by-nic").value.trim();
-        const student = students.find((student)=>student.nic == nic);
+        const student = students.find((student)=>student.nic.toLowerCase() == nic.toLowerCase());
         let CourseEnrollDetails;
         let coursedetails;
         let installment;
